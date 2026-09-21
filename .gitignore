@@ -1,0 +1,22 @@
+.DS_Store
+._*
+**/.venv/
+**/__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.log
+models/
+checkpoints/
+inputs/
+souvenir-sample/assets/space-kit.zip
+souvenir-sample/assets/kenney/*
+!souvenir-sample/assets/kenney/License.txt
+!souvenir-sample/assets/kenney/Models/
+souvenir-sample/assets/kenney/Models/*
+!souvenir-sample/assets/kenney/Models/GLTF format/
+souvenir-sample/assets/kenney/Models/GLTF format/*
+!souvenir-sample/assets/kenney/Models/GLTF format/rocket_baseA.glb
+!souvenir-sample/assets/kenney/Models/GLTF format/rocket_fuelB.glb
+!souvenir-sample/assets/kenney/Models/GLTF format/rocket_topA.glb

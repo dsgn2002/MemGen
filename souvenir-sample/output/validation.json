@@ -1,0 +1,14 @@
+{
+  "name": "HKUST VISITOR",
+  "source": "https://kenney.nl/assets/space-kit",
+  "license": "CC0",
+  "geometry_count": 39,
+  "triangles": 3936,
+  "dimensions_mm": [
+    76.6,
+    79.94999999999999,
+    90.7000008225441
+  ],
+  "all_vertices_finite": true,
+  "note": "Digital assembly. STL requires union/repair and printability validation."
+}
