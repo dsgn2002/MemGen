@@ -1,0 +1,6 @@
+[
+  {"id":"sai-kung-boat","location":"Sai Kung boat tour","hero_timestamp_s":60,"reference_timestamps_s":[60],"clip_range_s":[58,64]},
+  {"id":"coastal-trail","location":"MacLehose Trail","hero_timestamp_s":98,"reference_timestamps_s":[93,98,100],"clip_range_s":[97,102]},
+  {"id":"yi-o-harvest","location":"Yi O Organic Farm","hero_timestamp_s":140,"reference_timestamps_s":[140],"clip_range_s":[138,143]},
+  {"id":"wu-kau-tang-group","location":"Wu Kau Tang · Plover Cove","hero_timestamp_s":169,"reference_timestamps_s":[165,169],"clip_range_s":[164,170]}
+]

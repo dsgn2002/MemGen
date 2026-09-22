@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Travel Journey — Hong Kong</title>
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:light;--paper:#f5f3ed;--ink:#20332c;--muted:#69776f;--line:#d8ddd3;--green:#295b47}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}button,a,input{touch-action:manipulation}button,a{ -webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ca8c40;outline-offset:4px}button{border:1px solid var(--line);background:transparent;border-radius:24px;padding:9px 17px;color:inherit}button:hover{background:#e6eadf}button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}a{color:var(--green)}header,main,footer{width:min(1320px,94%);margin:auto}header{display:flex;align-items:center;justify-content:space-between;padding:28px 0 24px;gap:20px}.eyebrow{font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:.18em;color:var(--muted)}h1{font-family:Georgia,serif;font-size:clamp(28px,3vw,42px);font-weight:400;letter-spacing:-.035em;margin:2px 0 0}header .tag{font-size:12px;border:1px solid var(--line);border-radius:20px;padding:8px 13px;white-space:nowrap}.viewer{position:relative;background:#13221e;border-radius:18px;overflow:hidden;height:min(64vw,660px);min-height:320px;max-height:72vh;box-shadow:0 15px 42px #13302518}.viewer canvas{display:block;width:100%;height:100%;outline:none;touch-action:none}.top-overlay{position:absolute;top:20px;left:22px;right:22px;display:flex;justify-content:space-between;pointer-events:none;color:white;gap:16px;text-shadow:0 1px 8px #000}.chip{font-size:11px;letter-spacing:.1em;background:#0a191aaa;border:1px solid #ffffff25;border-radius:20px;padding:6px 11px;backdrop-filter:blur(12px)}.loading{position:absolute;inset:0;display:grid;place-content:center;color:#fafbf5;text-align:center;background:#172b25;z-index:3;padding:25px}.loading[hidden]{display:none}.loading p{color:#b3c3b5;margin:8px}.hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);white-space:nowrap;color:white;font-size:12px;background:#102c23bd;border-radius:20px;padding:7px 14px;pointer-events:none}.tools{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0;flex-wrap:wrap}.tool-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.scale{display:flex;align-items:center;gap:9px;font-size:12px}.scale input{width:120px;accent-color:var(--green)}.scale output{min-width:34px}.scene-info{display:flex;align-items:start;justify-content:space-between;gap:24px;margin:4px 0 23px}.scene-info h2{font:400 clamp(22px,2.5vw,30px)/1.25 Georgia,serif;margin:5px 0 8px}.scene-info p{color:var(--muted);margin:0;max-width:780px}.count{font:400 34px Georgia,serif;color:#99a596;white-space:nowrap;padding-top:9px}.count span{font-size:17px}.scenes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.scene-card{padding:0;border-radius:12px;text-align:left;overflow:hidden;background:#fafaf6;border:1px solid var(--line);transition:transform .15s}.scene-card:hover{transform:translateY(-3px);background:#fafaf6}.scene-card[aria-pressed=true]{background:#e6ecdf;color:var(--ink);border:2px solid var(--green)}.scene-card img{display:block;width:100%;aspect-ratio:16/7.8;object-fit:cover}.scene-card div{padding:13px 16px 16px}.scene-card small{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.scene-card strong{font:400 19px Georgia,serif;display:block;margin-top:4px}.details{border-top:1px solid var(--line);margin:27px 0 0;padding:19px 0;color:var(--muted);font-size:12px}.details summary{cursor:pointer;color:var(--ink);font-size:13px}.details p{max-width:900px}.downloads{display:flex;gap:17px;flex-wrap:wrap}.download-note{font-size:11px}footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:18px 0 32px;font-size:11px;color:var(--muted)}#error{color:#f0caae;white-space:pre-wrap}.subtle{font-size:12px;color:var(--muted)}@media(max-width:650px){header{padding:20px 0 18px}header .tag{display:none}.viewer{border-radius:12px;height:56vw;min-height:240px;max-height:none}.top-overlay{top:12px;left:12px;right:12px}.top-overlay .chip:last-child{display:none}.hint{bottom:12px;font-size:10px}.tools{padding:12px 0;gap:10px}.tools button{font-size:12px;padding:8px 12px}.scale input{width:90px}.scene-info{margin-top:6px;gap:12px}.scene-info p{font-size:13px}.count{font-size:27px}.scenes{gap:8px}.scene-card div{padding:9px}.scene-card small{font-size:8px;letter-spacing:0}.scene-card strong{font-size:14px}.scene-card img{aspect-ratio:1.25}.details{margin-top:20px}footer{gap:5px}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+</head>
+<body>
+<header><div><div class="eyebrow">Hong Kong · Three moments outdoors</div><h1>My Travel Journey</h1></div><div class="tag">A souvenir in motion</div></header>
+<main>
+<div class="viewer" id="viewer">
+  <canvas id="canvas" aria-label="Interactive 3D travel scene. Drag to rotate, scroll to zoom." tabindex="0"></canvas>
+  <div class="top-overlay"><span class="chip" id="place">HONG KONG</span><span class="chip">3D DEPTH RECONSTRUCTION</span></div>
+  <div class="hint" id="hint">Drag to rotate · Scroll or pinch to zoom</div>
+  <div class="loading" id="loading"><div id="load-title">Opening your journey…</div><p>Loading the reconstructed scene from Spark</p><div id="error" role="alert"></div></div>
+</div>
+<div class="tools">
+ <div class="tool-group"><button id="motion" aria-pressed="true">Pause motion</button><button id="reset">Reset view</button><button id="inspect" aria-pressed="false">Inspect geometry</button></div>
+ <div class="tool-group"><label class="scale" for="scale">Scene scale <input id="scale" type="range" min="0.6" max="1.5" step="0.05" value="1"><output id="scale-value">1.0×</output></label></div>
+</div>
+<div class="scene-info"><div><div id="location" class="eyebrow"></div><h2 id="title">Your journey, brought closer</h2><p id="caption"></p></div><div class="count" id="count">01 <span>/ 03</span></div></div>
+<nav class="scenes" id="scenes" aria-label="Choose a journey moment"></nav>
+<details class="details"><summary>About this reconstruction &amp; downloads</summary>
+ <p>The people, colors and natural scenery come from the original travel footage. Estimated depth turns each frame into a 3D surface, and the recorded movement plays across it. Explore nearby viewpoints for the best result. Wide rotations reveal the limits of the source view: hidden sides are not modeled, and people are not separate rigged characters.</p>
+ <p>Geometry was estimated locally on DGX Spark with MoGe-2, then assembled and rendered in NVIDIA Omniverse. This generation made no StepFun API calls. The interactive browser uses the same geometry and original video textures.</p>
+ <div class="downloads"><a id="usd" download>Omniverse scene + textures (.zip)</a><a id="glb" download>Current scene, still mesh (.glb)</a><a id="rtx" target="_blank" rel="noopener">Omniverse RTX preview</a><a href="build-report.json" target="_blank" rel="noopener">Build report</a></div>
+ <p class="download-note">Files are stored on Spark. Downloading saves a copy onto your device; the viewer streams its smaller preview assets.</p>
+</details>
+</main>
+<footer><span>Footage: <a href="https://www.youtube.com/watch?v=9jtnoejpLcU" target="_blank" rel="noopener">The Hong Kong Outdoor Adventure · The Travel Intern</a></span><span>Selected memories 01 · 02 · 03</span></footer>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const $=id=>document.getElementById(id);
+const renderer=new THREE.WebGLRenderer({canvas:$('canvas'),antialias:true,alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.setClearColor(0x13221e);renderer.toneMapping=THREE.NoToneMapping;
+const world=new THREE.Scene(), camera=new THREE.PerspectiveCamera(48,16/9,.001,100000);
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;
+controls.enablePan=true;controls.minDistance=.4;controls.maxDistance=150;controls.rotateSpeed=.4;
+const root=new THREE.Group();world.add(root);
+let manifest,active,mesh,video,texture,depths,geometry,sceneIndex=0,serial=0,playing=true,inspecting=false,frame=-1,userMoved=false,lastMove=0;
+const videos=new Map(), resources=new Map();
+controls.addEventListener('start',()=>{userMoved=true;lastMove=performance.now()});
+function resize(){const box=$('viewer').getBoundingClientRect();renderer.setSize(box.width,box.height,false);camera.aspect=box.width/box.height;camera.updateProjectionMatrix()}
+new ResizeObserver(resize).observe($('viewer'));
+function resetView(){root.scale.setScalar(1);$('scale').value=1;$('scale-value').textContent='1.0×';camera.position.set(0,0,6);controls.target.set(0,0,0);controls.update();userMoved=false;camera.fov=active.fov_y;resize()}
+async function fetchScene(entry){
+ if(resources.has(entry.id))return resources.get(entry.id);
+ const promise=(async()=>{
+   const response=await fetch(entry.depth);if(!response.ok)throw Error('Unable to load scene geometry.');
+   const raw=await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+   const values=new Uint16Array(raw), expected=entry.grid_width*entry.grid_height*entry.frame_count;
+   if(values.length!==expected)throw Error('Incomplete geometry; reload the scene.');
+   const decoded=new Float32Array(expected),range=entry.log_depth_max-entry.log_depth_min;
+   for(let i=0;i<expected;i++)decoded[i]=Math.exp(entry.log_depth_min+values[i]/65535*range);
+   const clip=document.createElement('video');clip.src=entry.video;clip.crossOrigin='anonymous';clip.muted=true;clip.loop=true;clip.playsInline=true;clip.preload='auto';
+   await new Promise((resolve,reject)=>{clip.onloadeddata=resolve;clip.onerror=()=>reject(Error('Unable to load source motion.'));clip.load()});
+   videos.set(entry.id,clip);return {decoded,clip};
+ })();resources.set(entry.id,promise);try{return await promise}catch(error){resources.delete(entry.id);throw error}
+}
+function updateSurface(force=false){
+ if(!active||!depths||!geometry)return;
+ const f=Math.min(active.frame_count-1,Math.floor(video.currentTime*active.fps));
+ if(!force&&frame===f)return;frame=f;
+ const w=active.grid_width,h=active.grid_height,n=w*h, k=active.intrinsics,positions=geometry.attributes.position.array;
+ const scale=active.factor,focus=active.focus,offset=f*n;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const i=y*w+x,d=depths[offset+i],p=i*3;
+  positions[p]=((x+.5)/w-k[0][2])/k[0][0]*d*scale;
+  positions[p+1]=-((y+.5)/h-k[1][2])/k[1][1]*d*scale;
+  positions[p+2]=(focus-d)*scale;
+ }
+ geometry.attributes.position.needsUpdate=true;geometry.computeBoundingSphere();
+}
+async function selectScene(index){
+ const token=++serial;sceneIndex=index;$('loading').hidden=false;$('load-title').textContent='Opening moment '+String(index+1).padStart(2,'0')+'…';$('error').textContent='';
+ if(video)video.pause();
+ try{
+  const entry=manifest.scenes[index], resource=await fetchScene(entry);if(token!==serial)return;
+  if(mesh){root.remove(mesh);geometry.dispose();mesh.material.dispose();texture.dispose()}
+  active=entry;depths=resource.decoded;video=resource.clip;video.currentTime=0;
+  const w=entry.grid_width,h=entry.grid_height,n=w*h;
+  geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(n*3),3));
+  const uv=new Float32Array(n*2),indices=[];
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   let i=y*w+x;uv[2*i]=(x+.5)/w;uv[2*i+1]=1-(y+.5)/h;
+   if(x<w-1&&y<h-1)indices.push(i,i+w,i+1,i+1,i+w,i+w+1);
+  }
+  geometry.setAttribute('uv',new THREE.BufferAttribute(uv,2));geometry.setIndex(indices);
+  texture=new THREE.VideoTexture(video);texture.colorSpace=THREE.SRGBColorSpace;
+  mesh=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({map:texture,side:THREE.DoubleSide,wireframe:inspecting}));mesh.name=entry.id;root.add(mesh);
+  updateSurface(true);resetView();
+  const maxZ=6-entry.near_surface; $('scale').max=String(Math.max(1.05,Math.min(1.5,maxZ>0?5.5/maxZ:1.5)));
+  $('title').textContent=entry.title;$('caption').textContent=entry.caption;$('location').textContent=entry.location;$('place').textContent=entry.location.toUpperCase();$('count').innerHTML=String(index+1).padStart(2,'0')+' <span>/ 03</span>';
+  $('glb').href=entry.glb;$('rtx').href=entry.omniverse_preview;
+  document.querySelectorAll('.scene-card').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));
+  if(playing){try{await video.play()}catch{playing=false;$('motion').textContent='Play motion';$('motion').setAttribute('aria-pressed','false')}}
+  $('loading').hidden=true;
+ }catch(error){$('load-title').textContent='The scene could not load.';$('error').textContent=error.message;console.error(error)}
+}
+$('motion').onclick=async()=>{if(!video)return;playing=!playing;playing?await video.play():video.pause();$('motion').textContent=playing?'Pause motion':'Play motion';$('motion').setAttribute('aria-pressed',String(playing))};
+$('reset').onclick=()=>{if(active)resetView()};
+$('inspect').onclick=()=>{inspecting=!inspecting;if(mesh)mesh.material.wireframe=inspecting;$('inspect').setAttribute('aria-pressed',String(inspecting));$('hint').textContent=inspecting?'Estimated geometry · Hidden sides are not modeled':'Drag to rotate · Scroll or pinch to zoom'};
+$('scale').oninput=()=>{root.scale.setScalar(Number($('scale').value));$('scale-value').textContent=Number($('scale').value).toFixed(2)+'×';userMoved=true};
+document.addEventListener('visibilitychange',()=>{if(!video)return;if(document.hidden)video.pause();else if(playing)video.play().catch(()=>{})});
+renderer.setAnimationLoop(now=>{
+ if(active){updateSurface();if(playing&&!userMoved&&!inspecting){const a=Math.min(.10,active.near_surface*.022);camera.position.set(Math.sin(now*.00038)*a,Math.cos(now*.0003)*a*.3,6)}controls.update()}
+ renderer.render(world,camera);
+});
+// Read-only diagnostics for validating interaction and animation in the real viewer.
+window.journeyState=()=>({scene:active?.id,vertices:geometry?.attributes.position.count,triangles:geometry?.index.count/3,frame,time:video?.currentTime,scale:root.scale.x,camera:camera.position.toArray(),playing,inspecting,depthSpan:active?.depth_span,loading:!$('loading').hidden});
+try{
+ const response=await fetch('manifest.json');if(!response.ok)throw Error('The reconstruction manifest is unavailable.');manifest=await response.json();
+ if(!manifest.omniverse_complete)throw Error('Omniverse is still assembling the result.');
+ $('usd').href=manifest.usd_bundle;
+ for(const [index,entry] of manifest.scenes.entries()){
+  const button=document.createElement('button');button.className='scene-card';button.setAttribute('aria-pressed','false');button.dataset.scene=entry.id;
+  const image=document.createElement('img');image.src=entry.poster;image.alt=entry.caption;image.loading='lazy';
+  const div=document.createElement('div'),small=document.createElement('small'),strong=document.createElement('strong');small.textContent=String(index+1).padStart(2,'0')+' / '+entry.location;strong.textContent=entry.title;div.append(small,strong);button.append(image,div);button.onclick=()=>selectScene(index);$('scenes').append(button);
+ }
+ await selectScene(0);
+}catch(error){$('load-title').textContent='The journey could not open.';$('error').textContent=error.message;console.error(error)}
+</script>
+</body></html>

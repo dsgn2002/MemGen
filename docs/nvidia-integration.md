@@ -1,6 +1,14 @@
 # NVIDIA integration plan
 
-Status: researched candidates, not installed or integrated into MemGen yet.
+Status: Omniverse Kit assembly, RTX rendering and USD/GLB export are validated on
+DGX Spark. The broader agent tooling below remains a set of researched candidates.
+
+The current product design is [My Travel Journey](my-travel-journey-plan.md).
+The working demo reuses the saved Step 5 journey review, estimates selected
+frames' geometry locally with MoGe-2, and assembles it in Omniverse without new
+StepFun API calls. See the [implemented pipeline](../journey-demo/README.md).
+The first-agent demonstration below records the earlier mesh-personalization
+milestone; the broader multi-tool architecture remains planned.
 
 ## Existing tools to reuse
 

@@ -1,10 +1,14 @@
 .DS_Store
 ._*
 **/.venv/
+.journey-tools/
+journey-demo/runs/
+/tmp/
 **/__pycache__/
 *.pyc
 .env
 .env.*
+*.env
 !.env.example
 *.log
 models/

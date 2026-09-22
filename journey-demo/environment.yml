@@ -1,0 +1,16 @@
+name: travel_journey_map
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - pip
+  - numpy
+  - pillow
+  - trimesh
+  - requests
+  - python-dotenv
+  - jsonschema
+  - pip:
+      - --extra-index-url https://pypi.nvidia.com
+      - omniverse-kit==110.3.0.371399

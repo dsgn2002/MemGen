@@ -1,0 +1,40 @@
+{
+  "source_sha256": "efc60dc3aad3e4522fa5afce8e98d9974d9e456264a52cc256775a27c945c687",
+  "note": "Assistant copy edits after direct inspection of the source frames: remove unsupported terracing, distinguish crossbody bag from backpack, describe cropped bodies, and simplify repeated or technical wording. The original Step 5 response is retained unchanged.",
+  "summary": "This Hong Kong adventure moves from busy city streets to a quieter world of islands, beaches and green hills. The travelers take a boat around Sai Kung and walk its coastal trails, then head to Lantau for farm visits, fresh harvests and Tai O's waterside village. Around Plover Cove, they gather for a group selfie, share food and explore the paths and village of Lai Chi Wo. The people and their small shared moments make the scenery feel personal.",
+  "chapters": [
+    {"title":"Sai Kung · Sea & coastal trails","description":"A boat ride, the reservoir and rocky hiking paths reveal Hong Kong's turquoise coast."},
+    {"title":"Lantau · Farm & village life","description":"The group walks through green countryside, visits Yi O Farm and explores Tai O."},
+    {"title":"Plover Cove · A shared adventure","description":"A group selfie, food stops and the paths of Lai Chi Wo bring the journey together."}
+  ],
+  "scenes": {
+    "sai-kung-boat": {
+      "title":"Out on the water",
+      "proposed_scene":"The three travelers together on the boat, keeping the pointing gesture, clothing and green canopy. Textured water and distant hills would surround the deck.",
+      "selection_reason":"For the feeling of traveling together"
+    },
+    "coastal-trail": {
+      "title":"The view was worth the climb",
+      "people":"The main frame shows a full-body hiker in a pale pink T-shirt, dark shorts and a black crossbody bag. A companion appears in the additional footage.",
+      "proposed_scene":"The hiker mid-stride on the curved coastal path, with textured scrub, a pale beach and turquoise water below. The wide bay would be the scene's backdrop.",
+      "reference_limit":"The hiker's face is small in the frame, and the body's hidden sides and terrain beyond the view are not recorded in full.",
+      "selection_reason":"For a person within a sweeping landscape"
+    },
+    "yi-o-harvest": {
+      "title":"A little harvest to remember",
+      "moment":"A traveler lifts two leafy root vegetables toward the camera, with a companion beside the farm path.",
+      "people":"The foreground traveler wears a white T-shirt, dark-framed glasses and a black backpack; the companion wears a blue sleeveless top and sunglasses.",
+      "setting":"A dirt farm path runs between grassy plots, with low green shelters and densely vegetated hills behind.",
+      "proposed_scene":"The traveler holding up the harvest, with the companion beside the path. Detailed leaves, root vegetables, farm plots and green hills would preserve the setting around them.",
+      "preserve":["white T-shirt, glasses and black backpack","two root vegetables with leafy tops","companion's blue sleeveless top","dirt path through grassy farm plots","green hills and low farm shelters"],
+      "reference_limit":"Their lower legs and backs are outside this view; the full shape of the hills and plots is not captured.",
+      "selection_reason":"For a close, personal moment in nature"
+    },
+    "wu-kau-tang-group": {
+      "title":"Everyone in the frame",
+      "people":"Four travelers face the camera in white, dark blue and striped shirts and a dark sleeveless top, with visible bag straps and glasses.",
+      "proposed_scene":"The group together in the foreground, retaining their visible expressions, clothing and spacing. Grass, village houses and rounded green hills would give the portrait a natural setting.",
+      "selection_reason":"For remembering the people you traveled with"
+    }
+  }
+}
