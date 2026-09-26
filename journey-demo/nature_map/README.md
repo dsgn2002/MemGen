@@ -1,5 +1,9 @@
 # Sai Kung nature map
 
+The [two-scene revision](web/README.md) adds the three missing boat passengers,
+a Hong Kong tram-travel sample, and daylight/sunset/night controls. The original
+run documented below remains available as generation provenance.
+
 This sample uses local Qwen image/video understanding, Qwen image editing, and
 TRELLIS.2 asset generation on DGX Spark. The output target is an interactive
 stylized 3D travel map with independent terrain, traveler, and boat meshes.

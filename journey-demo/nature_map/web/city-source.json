@@ -1,0 +1,19 @@
+{
+  "title": "Hong Kong Trams, September 2009",
+  "creator": "michaelinlondon",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Trams,_September_2009-UKNqZzl2cu8.webm",
+  "video_url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Hong_Kong_Trams%2C_September_2009-UKNqZzl2cu8.webm",
+  "license": "https://creativecommons.org/licenses/by/3.0/",
+  "sha256": "9275c744742c2e683ca054e79687583d3cdc0558ff35f0c225017bfcb08f6e5b",
+  "bytes": 62315947,
+  "source_resolution": [
+    480,
+    360
+  ],
+  "selected_seconds": [
+    50,
+    190,
+    435
+  ],
+  "changes": "Frames extracted; buildings and tram generated from reference frames; scene layout, illustrative pedestrians, and alternative lighting authored."
+}

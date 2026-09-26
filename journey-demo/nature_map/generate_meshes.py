@@ -1,4 +1,5 @@
 """Run TRELLIS.2 on approved local styled images, with Spark-compatible attention."""
+import argparse
 import json
 import os
 import sys
@@ -43,6 +44,15 @@ def prepare_attention():
 
 
 def main():
+    global RUN
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", type=Path, default=RUN)
+    parser.add_argument("--assets", nargs="+", default=["coast", "traveler", "boat"])
+    parser.add_argument("--triangles", type=int, default=120000)
+    parser.add_argument("--texture-size", type=int, default=2048)
+    options = parser.parse_args()
+    RUN = options.run
+    (RUN / "analysis").mkdir(parents=True, exist_ok=True)
     prepare_attention()
     import numpy as np
     import torch
@@ -97,7 +107,7 @@ def main():
     print('Loading TRELLIS from verified local weights', flush=True)
     pipeline = Trellis2ImageTo3DPipeline.from_pretrained(str(checkpoint), config_file='pipeline.spark.json')
     pipeline.cuda()
-    for name in ['coast', 'traveler', 'boat']:
+    for name in options.assets:
         path = RUN / f'output/{name}.glb'
         if path.exists():
             print('Already generated', name, flush=True)
@@ -115,7 +125,7 @@ def main():
         glb = o_voxel.postprocess.to_glb(vertices=mesh.vertices, faces=mesh.faces,
             attr_volume=mesh.attrs, coords=mesh.coords, attr_layout=mesh.layout,
             voxel_size=mesh.voxel_size, aabb=[[-.5, -.5, -.5], [.5, .5, .5]],
-            decimation_target=120000, texture_size=2048, remesh=True,
+            decimation_target=options.triangles, texture_size=options.texture_size, remesh=True,
             remesh_band=1, remesh_project=0, verbose=True)
         glb.export(str(path))
         record = {'model': 'microsoft/TRELLIS.2-4B', 'pipeline': '512',

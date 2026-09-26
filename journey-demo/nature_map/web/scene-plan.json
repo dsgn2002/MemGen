@@ -1,0 +1,71 @@
+{
+  "version": 2,
+  "review_method": "Manually reviewed source frames; generated assets checked in rendered scene",
+  "coast": {
+    "source_seconds": [
+      58,
+      60,
+      62
+    ],
+    "requirements": {
+      "passenger_count": 3,
+      "relationship": "all three passengers attached to the moving boat",
+      "boat": "white hull with green canopy"
+    },
+    "passengers": [
+      {
+        "asset": "passenger-white",
+        "appearance": "white rolled-sleeve shirt, beige shorts",
+        "position": [
+          -0.44,
+          0.59,
+          0.55
+        ]
+      },
+      {
+        "asset": "passenger-dark",
+        "appearance": "dark sleeveless top, sunglasses, purple shorts",
+        "position": [
+          0,
+          0.59,
+          0.55
+        ]
+      },
+      {
+        "asset": "passenger-orange",
+        "appearance": "orange jacket, striped shirt, eyeglasses",
+        "position": [
+          0.44,
+          0.59,
+          0.55
+        ]
+      }
+    ]
+  },
+  "city": {
+    "source": "Hong Kong Trams, September 2009",
+    "source_author": "michaelinlondon",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Trams,_September_2009-UKNqZzl2cu8.webm",
+    "license": "CC BY 3.0",
+    "source_seconds": [
+      50,
+      190,
+      435
+    ],
+    "requirements": [
+      "two distinct tram decks",
+      "dense apartment shopfronts",
+      "visible street tram tracks"
+    ],
+    "creative_additions": [
+      "recomposed street layout",
+      "illustrative pedestrians",
+      "sunset and night lighting"
+    ]
+  },
+  "limitations": [
+    "stylized faces and inferred hidden surfaces",
+    "not surveyed geography",
+    "posed passengers; no skeletal animation"
+  ]
+}

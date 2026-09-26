@@ -1,8 +1,20 @@
 # My Travel Journey
 
-Turn selected travel moments into an interactive digital souvenir. The latest sample creates a stylized Sai Kung nature map with generated terrain, traveler, and boat meshes. It runs on DGX Spark and supports animation, rotation, zoom, scaling, and clickable source memories. MemGen is the repository name and earlier prototype codebase.
+Turn selected travel moments into an interactive digital souvenir. The demos create a Sai Kung nature map with three boat companions and a Hong Kong tram street. Assets are generated on DGX Spark; the browser supports animation, camera controls, source memories, and daylight, sunset, and night atmospheres. MemGen is the repository name and earlier prototype codebase.
 
 A prototype for the NVIDIA DGX Spark hackathon. Our direction is to reuse existing NVIDIA agent tooling, official skills, local model serving recipes, and freely licensed meshes.
+
+## Published demonstration
+
+[Project website](https://dsgn2002.github.io/sai-kung-3d-viewer/) ·
+[Coast and three companions](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/?scene=coast) ·
+[Hong Kong by tram](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/?scene=city)
+
+The updated browser demo preserves the three boat passengers as separate generated
+assets and includes a city-travel sample with a moving double-decker tram. Both
+scenes have daylight, golden sunset, and night atmosphere controls. The source
+frames, creative additions, and limitations are identified in each viewer.
+See [revision setup and validation](journey-demo/nature_map/web/README.md).
 
 ## Sai Kung nature map
 

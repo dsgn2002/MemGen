@@ -46,3 +46,13 @@ Python dependencies retain their own licenses. AI model weights are not covered 
 - The source footage and extracted memory frames use the same Travel Intern
   attribution listed above. Generated outputs remain on the compute host and
   are excluded from this source-code update.
+
+## Hong Kong city travel sample
+
+“Hong Kong Trams, September 2009” by michaelinlondon is licensed under
+[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+[Source and license record](https://commons.wikimedia.org/wiki/File:Hong_Kong_Trams,_September_2009-UKNqZzl2cu8.webm).
+Frames at 50, 190, and 435 seconds are extracted for the demonstration.
+Reference frames are transformed into stylized building and tram meshes; the
+street layout, illustrative pedestrians, and alternate lighting are added.
+This attribution does not imply endorsement by the creator.

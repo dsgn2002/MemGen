@@ -1,0 +1,18 @@
+{
+  "run": "/home/Developer/travel_journey_map/runs/2026-09-26-diverse-demo",
+  "source_url": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Trams,_September_2009-UKNqZzl2cu8.webm",
+  "source_author": "michaelinlondon",
+  "license": "CC BY 3.0",
+  "assets": [
+    {
+      "name": "city-buildings",
+      "source": "/home/Developer/travel_journey_map/runs/2026-09-26-diverse-demo/input/frame-50.jpg",
+      "prompt": "Transform the architecture in this Hong Kong street photograph into one beautiful complete isolated 3D miniature asset: a straight row of three adjoining narrow eight-storey Hong Kong apartment shophouses, with weathered pale cream and muted pink facades, many individual windows, protruding air conditioners, small balconies, and colorful street-level shop awnings. Keep the recognizable densely packed Hong Kong street character. All three buildings have the same straight front building line. Show entire buildings from roofs to ground, a shallow sidewalk at their feet, front three-quarter view. Detailed stylized animated-film game asset, rich realistic facade texture, neutral daylight. Isolated on pure white background with generous margin. No street road, vehicles, tram, people, text overlays or scenery. Do not render a photo rectangle. Solid complete building volumes."
+    },
+    {
+      "name": "city-tram",
+      "source": "/home/Developer/travel_journey_map/runs/2026-09-26-diverse-demo/input/frame-435.jpg",
+      "prompt": "Create one complete isolated stylized 3D miniature Hong Kong double-decker tram faithfully based on the light blue tram in this reference. Very narrow tall double-decker body, two distinct levels of rectangular passenger windows, pale blue and white painted body, black wheels beneath, entrance at the end and thin roof trolley pole. Both decks and the entire elongated vehicle must be visible. Three-quarter front side view, clear complete vehicle silhouette, detailed game-ready animated-film style, soft neutral studio lighting, pure white background with generous margin. Remove advertising logos, readable text, background buildings, people, road and foliage. Exactly one tram, no base or pedestal."
+    }
+  ]
+}

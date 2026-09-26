@@ -24,3 +24,6 @@ souvenir-sample/assets/kenney/Models/GLTF format/*
 !souvenir-sample/assets/kenney/Models/GLTF format/rocket_baseA.glb
 !souvenir-sample/assets/kenney/Models/GLTF format/rocket_fuelB.glb
 !souvenir-sample/assets/kenney/Models/GLTF format/rocket_topA.glb
+
+# Standalone published website checkout
+/share-site/

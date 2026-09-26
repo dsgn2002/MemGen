@@ -1,0 +1,39 @@
+{
+  "run": "/home/Developer/travel_journey_map/runs/2026-09-26-diverse-demo",
+  "required_passenger_count": 3,
+  "assets": [
+    {
+      "name": "passenger-white",
+      "source": "/home/Developer/travel_journey_map/runs/2026-09-26-diverse-demo/input/frame-60.jpg",
+      "crop": [
+        70,
+        65,
+        510,
+        720
+      ],
+      "prompt": "Create exactly one complete full-body stylized 3D animated-film traveler matching this reference person. Standing upright, feet apart, relaxed arms separated from torso. Entire head, body, hands, legs and shoes visible. Front three-quarter view. Pure white studio background, soft neutral lighting, clean sculpted geometry, detailed clothing. No scenery, boat, other people, text, logos, pedestal or border. Young adult man with short black hair, white long-sleeved button shirt with sleeves rolled to elbows, beige shorts, dark casual shoes. Preserve white shirt and beige shorts."
+    },
+    {
+      "name": "passenger-dark",
+      "source": "/home/Developer/travel_journey_map/runs/2026-09-26-diverse-demo/input/frame-60.jpg",
+      "crop": [
+        445,
+        225,
+        690,
+        720
+      ],
+      "prompt": "Create exactly one complete full-body stylized 3D animated-film traveler matching this reference person. Standing upright, feet apart, relaxed arms separated from torso. Entire head, body, hands, legs and shoes visible. Front three-quarter view. Pure white studio background, soft neutral lighting, clean sculpted geometry, detailed clothing. No scenery, boat, other people, text, logos, pedestal or border. Young adult woman with dark tied-back hair, reflective green sunglasses, dark charcoal sleeveless top, purple shorts, casual shoes. Preserve sunglasses and dark sleeveless top. Both arms down relaxed."
+    },
+    {
+      "name": "passenger-orange",
+      "source": "/home/Developer/travel_journey_map/runs/2026-09-26-diverse-demo/input/frame-60.jpg",
+      "crop": [
+        652,
+        255,
+        935,
+        720
+      ],
+      "prompt": "Create exactly one complete full-body stylized 3D animated-film traveler matching this reference person. Standing upright, feet apart, relaxed arms separated from torso. Entire head, body, hands, legs and shoes visible. Front three-quarter view. Pure white studio background, soft neutral lighting, clean sculpted geometry, detailed clothing. No scenery, boat, other people, text, logos, pedestal or border. Young adult man with short black hair, black rectangular glasses, bright orange-red open rain jacket, gray-and-white striped T-shirt, dark trousers and dark shoes. Preserve orange jacket and eyeglasses."
+    }
+  ]
+}
