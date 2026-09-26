@@ -12,18 +12,7 @@ It uses no paid inference API. The browser displays the generated meshes with
 a moving boat, animated water, lighting controls, and three original memories:
 the Sai Kung boat tour, High Island Reservoir, and MacLehose coastal trail.
 
-```mermaid
-flowchart LR
-    A[Travel video] --> B[Sample chronological frames]
-    B --> C[Qwen: journey understanding]
-    C --> D[Selected memories and scene designs]
-    D --> E[Qwen Image Edit: styled assets]
-    E --> F[TRELLIS.2: textured 3D meshes]
-    F --> G[Omniverse: USD assembly and rendering]
-    F --> H[Compact GLB assets]
-    G --> I[Interactive map and source memories]
-    H --> I
-```
+![Sai Kung pipeline: video frames → Qwen understanding → selected memories → Qwen image styling → TRELLIS meshes → Omniverse and browser assets → interactive map](docs/images/sai-kung-pipeline.svg)
 
 The sample uses nine chronological frames and three fixed memory selections.
 The VLM records a journey summary; scene prompts and map layout are authored

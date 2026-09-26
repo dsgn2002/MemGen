@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="1100" viewBox="0 0 840 1100" role="img" aria-labelledby="title description">
+<title id="title">Sai Kung travel map generation pipeline</title>
+<desc id="description">Travel video, sampled frames, Qwen understanding, selected memories, Qwen image styling, and TRELLIS meshes. Meshes feed Omniverse scene assembly and compact browser assets. Both lead to the interactive travel map.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#64748b" stroke-width="2"/></marker></defs>
+<rect width="840" height="1100" fill="#ffffff"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="420" y="44" text-anchor="middle" font-size="30" font-weight="700" fill="#172338">From travel video to a 3D memory map</text>
+<text x="420" y="73" text-anchor="middle" font-size="19" fill="#475569">Local inference on DGX Spark</text>
+<rect x="85" y="101" width="670" height="88" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<circle cx="117" cy="133" r="17" fill="#2563eb"/>
+<text x="117" y="139" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">1</text>
+<text x="145" y="140" font-size="24" font-weight="700" fill="#172338">Travel video</text>
+<text x="109" y="169" font-size="19" fill="#334155">Sai Kung boat ride, reservoir, and coastal hike</text>
+<path d="M420 190 V210" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="85" y="218" width="670" height="88" rx="14" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+<circle cx="117" cy="250" r="17" fill="#0e7490"/>
+<text x="117" y="256" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">2</text>
+<text x="145" y="257" font-size="24" font-weight="700" fill="#172338">Sample chronological frames</text>
+<text x="109" y="286" font-size="19" fill="#334155">Nine source frames retain timestamps and visual evidence</text>
+<path d="M420 307 V327" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="85" y="335" width="670" height="88" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="117" cy="367" r="17" fill="#7c3aed"/>
+<text x="117" y="373" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">3</text>
+<text x="145" y="374" font-size="24" font-weight="700" fill="#172338">Qwen · Journey understanding</text>
+<text x="109" y="403" font-size="19" fill="#334155">Save the observed places, traveler details, and summary</text>
+<path d="M420 424 V444" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="85" y="452" width="670" height="88" rx="14" fill="#fdf2f8" stroke="#be185d" stroke-width="2"/>
+<circle cx="117" cy="484" r="17" fill="#be185d"/>
+<text x="117" y="490" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">4</text>
+<text x="145" y="491" font-size="24" font-weight="700" fill="#172338">Select memories &amp; design the map</text>
+<text x="109" y="520" font-size="19" fill="#334155">Three selected moments with authored scene prompts</text>
+<path d="M420 541 V561" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="85" y="569" width="670" height="88" rx="14" fill="#fff7ed" stroke="#c2410c" stroke-width="2"/>
+<circle cx="117" cy="601" r="17" fill="#c2410c"/>
+<text x="117" y="607" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">5</text>
+<text x="145" y="608" font-size="24" font-weight="700" fill="#172338">Qwen Image Edit · Style the assets</text>
+<text x="109" y="637" font-size="19" fill="#334155">Create a coherent coast, traveler, and boat design</text>
+<path d="M420 658 V678" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="85" y="686" width="670" height="88" rx="14" fill="#f0fdfa" stroke="#0f766e" stroke-width="2"/>
+<circle cx="117" cy="718" r="17" fill="#0f766e"/>
+<text x="117" y="724" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">6</text>
+<text x="145" y="725" font-size="24" font-weight="700" fill="#172338">TRELLIS.2 · Generate 3D meshes</text>
+<text x="109" y="754" font-size="19" fill="#334155">Textured terrain, traveler, and boat geometry</text>
+<path d="M420 775 V793 H215 V810" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M420 793 H625 V810" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="30" y="820" width="380" height="88" rx="14" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+<circle cx="62" cy="852" r="17" fill="#15803d"/>
+<text x="62" y="858" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">7A</text>
+<text x="90" y="859" font-size="24" font-weight="700" fill="#172338">Omniverse</text>
+<text x="54" y="888" font-size="19" fill="#334155">Assemble USD, animate, and render</text>
+<rect x="430" y="820" width="380" height="88" rx="14" fill="#fffbeb" stroke="#a16207" stroke-width="2"/>
+<circle cx="462" cy="852" r="17" fill="#a16207"/>
+<text x="462" y="858" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">7B</text>
+<text x="490" y="859" font-size="24" font-weight="700" fill="#172338">Browser assets</text>
+<text x="454" y="888" font-size="19" fill="#334155">Compress GLBs with WebP + Meshopt</text>
+<path d="M215 909 V936 H420 V953" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M625 909 V936 H420" fill="none" stroke="#64748b" stroke-width="2.5"/>
+<rect x="85" y="963" width="670" height="88" rx="14" fill="#eef2ff" stroke="#4338ca" stroke-width="2"/>
+<circle cx="117" cy="995" r="17" fill="#4338ca"/>
+<text x="117" y="1001" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">8</text>
+<text x="145" y="1002" font-size="24" font-weight="700" fill="#172338">Interactive 3D travel map</text>
+<text x="109" y="1031" font-size="19" fill="#334155">Rotate, zoom, scale, animate, and revisit source memories</text>
+<text x="420" y="1081" text-anchor="middle" font-size="18" fill="#475569">Stylized scene interpretation · Posed traveler · Animated boat and water</text></g></svg>
