@@ -1,10 +1,45 @@
 # My Travel Journey
 
-Turn selected travel moments into an interactive digital souvenir. The current demo reconstructs three short scenes from a Hong Kong travel video, preserving the visible people and natural scenery with original video textures. It runs on DGX Spark and supports animation, rotation, zoom, and scaling. MemGen is the repository name and earlier prototype codebase.
+Turn selected travel moments into an interactive digital souvenir. The latest sample creates a stylized Sai Kung nature map with generated terrain, traveler, and boat meshes. It runs on DGX Spark and supports animation, rotation, zoom, scaling, and clickable source memories. MemGen is the repository name and earlier prototype codebase.
 
 A prototype for the NVIDIA DGX Spark hackathon. Our direction is to reuse existing NVIDIA agent tooling, official skills, local model serving recipes, and freely licensed meshes.
 
-## Travel journey demo
+## Sai Kung nature map
+
+The local pipeline is **Qwen3.6-27B video understanding → Qwen-Image-Edit-2511
+styling → TRELLIS.2-4B textured meshes → Omniverse assembly and RTX rendering**.
+It uses no paid inference API. The browser displays the generated meshes with
+a moving boat, animated water, lighting controls, and three original memories:
+the Sai Kung boat tour, High Island Reservoir, and MacLehose coastal trail.
+
+```mermaid
+flowchart LR
+    A[Travel video] --> B[Sample chronological frames]
+    B --> C[Qwen: journey understanding]
+    C --> D[Selected memories and scene designs]
+    D --> E[Qwen Image Edit: styled assets]
+    E --> F[TRELLIS.2: textured 3D meshes]
+    F --> G[Omniverse: USD assembly and rendering]
+    F --> H[Compact GLB assets]
+    G --> I[Interactive map and source memories]
+    H --> I
+```
+
+The sample uses nine chronological frames and three fixed memory selections.
+The VLM records a journey summary; scene prompts and map layout are authored
+for this Sai Kung example, rather than automatically compiled from that summary.
+
+The output contains about 350,000 triangles across three independent meshes.
+Browser assets use WebP textures and Meshopt compression; editable originals
+and a USD scene with textures remain available. This is an artistic map with
+generated hidden surfaces and a posed traveler, not surveyed geography or a
+rigged human animation.
+
+See [sample scripts, environment, and usage](journey-demo/nature_map/README.md).
+Generated assets and model weights remain on Spark; the private preview is
+served through an SSH tunnel at `http://127.0.0.1:8768/`.
+
+## Earlier depth-projection demo
 
 The workflow starts with a human-readable **journey review**: a saved Step 5
 summary, four scene suggestions with source frames and video previews, and an
@@ -62,9 +97,9 @@ Outputs are written to `souvenir-sample/output/`. GLB uses metres and Y-up; STL 
 
 ## Agent workflow being designed
 
-1. Interpret the video, summarize the journey and suggest scenes with source frames. The current review reuses saved Step 5 results.
+1. Interpret the video, summarize the journey and suggest scenes with source frames. The new map runs local Qwen; the older review reuses saved Step 5 results.
 2. Let the user select one or more scenes and describe what matters. Save the selection before generation.
-3. Estimate selected frames' geometry locally on Spark, then assemble and render the textured surfaces in NVIDIA Omniverse. Complete characters and unseen surroundings remain future work.
+3. Style selected memories with local Qwen image editing, generate terrain and character meshes with TRELLIS.2, then assemble and render them in NVIDIA Omniverse. Skeletal character animation remains future work.
 4. Inspect rendered views, check browser interactions, and apply bounded repairs or visitor edits.
 5. Deliver a shared browser experience with GLB assets, a behavior manifest, and selected memories.
 

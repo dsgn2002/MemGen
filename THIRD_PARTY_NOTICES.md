@@ -13,7 +13,7 @@
 
 The HTML viewer loads Google model-viewer 4.0.0 from unpkg. See https://github.com/google/model-viewer for its Apache-2.0 license and notices. It is referenced, not vendored.
 
-Python dependencies retain their own licenses. Future AI model weights are not covered by this repository's MIT license.
+Python dependencies retain their own licenses. AI model weights are not covered by this repository's MIT license.
 
 ## Travel reconstruction dependencies
 
@@ -29,3 +29,20 @@ Python dependencies retain their own licenses. Future AI model weights are not c
   Intern](https://www.youtube.com/watch?v=9jtnoejpLcU). Attribution remains in the
   viewers and run manifests. The source video, extracted frames and textured
   outputs are excluded from this repository and are not relicensed under MIT.
+
+## Generated Sai Kung nature map
+
+- Local inference uses Qwen3.6-27B, Qwen-Image-Edit-2511, and
+  [Microsoft TRELLIS.2](https://github.com/microsoft/TRELLIS.2), with DINOv3
+  features and a sparse decoder from TRELLIS-image-large. Their model and code
+  licenses remain separate. No weights or vendor source trees are included.
+- The compute environment also uses FlexGEMM, CuMesh, nvdiffrast, o-voxel,
+  utils3d, PyTorch, Transformers, Diffusers, and trimesh. These are installed
+  separately and retain their respective licenses.
+- The nature map viewer references Three.js 0.180.0, OrbitControls, GLTFLoader,
+  and MeshoptDecoder from jsDelivr. Browser asset compression uses
+  [meshoptimizer](https://github.com/zeux/meshoptimizer) 0.25. These dependencies
+  are referenced or installed separately, not vendored here.
+- The source footage and extracted memory frames use the same Travel Intern
+  attribution listed above. Generated outputs remain on the compute host and
+  are excluded from this source-code update.

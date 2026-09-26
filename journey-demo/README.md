@@ -3,7 +3,19 @@
 Development runs on DGX Spark in a dedicated Conda environment named
 `travel_journey_map`. Project data lives in `/home/Developer/travel_journey_map`.
 
-## Current result: scenes 1–3 without StepFun
+## Current result: generated Sai Kung nature map
+
+The latest workflow uses local **Qwen3.6-27B → Qwen-Image-Edit-2511 → TRELLIS.2
+→ NVIDIA Omniverse** to create three textured meshes: terrain, traveler, and
+boat. The interactive map has animated water and boat motion, three clickable
+travel memories, rotation, zoom, scaling, and lighting controls. The traveler
+is posed; the landscape is an artistic interpretation of the source video.
+
+See [the nature map pipeline](nature_map/README.md) for the scripts, runtime,
+validated result, rerun commands, and access instructions. The preview uses
+port **8768**. The older depth-projection pipeline below uses port 8767.
+
+## Earlier result: scenes 1–3 without StepFun
 
 Run `runs/2026-09-22-scenes-123` contains the Sai Kung boat, coastal trail and Yi O
 harvest moments. All geometry inference and Omniverse work ran on Spark. This
