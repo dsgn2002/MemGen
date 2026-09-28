@@ -36,6 +36,8 @@ const sky=new THREE.Mesh(new THREE.SphereGeometry(100,32,16),new THREE.ShaderMat
 const starGeo=new THREE.BufferGeometry(),starCoords=[];let seed=1926;function rand(){seed=(1664525*seed+1013904223)>>>0;return seed/4294967296}for(let i=0;i<900;i++){const a=rand()*Math.PI*2,y=.015+rand()*.94,r=Math.sqrt(1-y*y);starCoords.push(Math.cos(a)*r*85,y*85,Math.sin(a)*r*85)}starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starCoords,3));const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:'#dce7ff',size:.28,transparent:true,opacity:0,depthWrite:false}));scene.add(stars);
 const clock=new THREE.Clock(),glb=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),lamps=[],glows=[],assetNames=[],passengers=[],passengerPositions=[];
 let loading=true,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,elapsed=0,preset='day',intensity=1,boat,tram,water,follow=false,triangles=0,loadError=null;
+// Boat laps the island: radius clears the 14-unit coast footprint, one lap ≈ 60 s, heading follows the tangent (bow assumed at local −z).
+const BOAT_RADIUS=11.5,BOAT_SPEED=Math.PI*2/60,BOAT_START=Math.atan2(6,-8),BOAT_HEADING=0;
 const roofPlane=new THREE.Plane(new THREE.Vector3(0,-1,0),1.4);
 function std(color,extra={}){return new THREE.MeshStandardMaterial({color,roughness:.7,...extra})}
 function box(w,h,d,material,x=0,y=0,z=0,parent=root){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
@@ -85,7 +87,7 @@ function resize(){const w=$('stage').clientWidth,h=$('stage').clientHeight;rende
 try{if(city)await loadCity();else await loadCoast();loading=false;$('loader').hidden=true;lighting('day')}catch(error){loadError=error.message;$('load-text').textContent='The scene could not load. Refresh to retry. '+error.message;console.error(error)}
 let lastSubject=null;
 function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.1);if(playing)elapsed+=dt;if(water)water.material.uniforms.time.value=elapsed;
- if(boat){boat.position.set(-8+Math.sin(elapsed*.06)*.9,-.38+Math.sin(elapsed*1.6)*.035,6+Math.cos(elapsed*.06)*.6);boat.rotation.y=.2+Math.sin(elapsed*.06)*.35;roofPlane.constant=(boat.position.y+1.35)*root.scale.y;}
+ if(boat){const a=BOAT_START+elapsed*BOAT_SPEED;boat.position.set(Math.cos(a)*BOAT_RADIUS,-.38+Math.sin(elapsed*1.6)*.035,Math.sin(a)*BOAT_RADIUS);boat.rotation.y=Math.atan2(Math.sin(a),-Math.cos(a))+BOAT_HEADING;boat.rotation.z=Math.sin(elapsed*1.1)*.025;roofPlane.constant=(boat.position.y+1.35)*root.scale.y;}
  if(tram){tram.position.z=Math.sin(elapsed*.12)*8;}
  const subject=city?tram:boat;if(follow&&subject){const p=subject.getWorldPosition(new THREE.Vector3());if(lastSubject)camera.position.add(p.clone().sub(lastSubject));controls.target.copy(p).add(new THREE.Vector3(0,city?1.5:.85,0));lastSubject=p;}else lastSubject=null;
  controls.update();sky.position.copy(camera.position);stars.position.copy(camera.position);composer.render();}
