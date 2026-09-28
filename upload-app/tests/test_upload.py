@@ -195,6 +195,10 @@ class UploadTests(unittest.TestCase):
                     generate(self.settings,gid)
                 invoked.assert_not_called()
             self.store.finish_generation(gid,'Test failure')
+            self.assertEqual(self.client.get(f'/api/projects/{p}').json()['generation']['id'],gid)
+            approval['lighting']='day'
+            self.assertEqual(self.client.post(f'/api/projects/{p}/approve',json=approval).status_code,200)
+            self.assertIsNone(self.client.get(f'/api/projects/{p}').json()['generation'])
             retry=self.client.post(f'/api/projects/{p}/generate').json()['generation_id']
             self.client.post(f'/api/projects/{p}/generations/{retry}/cancel')
             self.assertIsNone(self.store.claim_generation())

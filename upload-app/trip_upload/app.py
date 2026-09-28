@@ -177,7 +177,7 @@ def create_app(settings=None):
                 u['parts'] = [dict(r) for r in db.execute('SELECT offset,size,sha256 FROM upload_parts WHERE upload=? ORDER BY offset', (u['id'],))] if u['status'] == 'uploading' else []
             job = db.execute('SELECT id,revision,status,stage,error,created,updated FROM jobs WHERE id=?', (p['current_job'],)).fetchone()
             p['job'] = dict(job) if job else None
-            generation = db.execute('SELECT id,status,stage,error,created,started,finished FROM generations WHERE project=? AND job=? ORDER BY created DESC LIMIT 1', (project, p['current_job'])).fetchone()
+            generation = db.execute('SELECT id,status,stage,error,created,started,finished FROM generations WHERE project=? AND job=? AND approval=? ORDER BY created DESC LIMIT 1', (project, p['current_job'], p['approval'])).fetchone()
             p['generation'] = dict(generation) if generation else None
             p['generation_available'] = generation_available(settings)
             p['approval'] = json.loads(p['approval']) if p['approval'] else None
