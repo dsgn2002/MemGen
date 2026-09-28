@@ -9,10 +9,11 @@ def main():
     parser.add_argument('--run', type=Path, required=True)
     parser.add_argument('--assets', nargs='+', required=True)
     parser.add_argument('--clean-studio-floor', action='store_true')
+    parser.add_argument('--packer', type=Path, default=Path('/home/Developer/travel_journey_map/vendor/meshoptimizer-0.25/gltfpack'))
     args = parser.parse_args()
     import trimesh
     import numpy as np
-    packer = Path('/home/Developer/travel_journey_map/vendor/meshoptimizer-0.25/gltfpack')
+    packer = args.packer
     report = {}
     for name in args.assets:
         directory = args.run / 'output'

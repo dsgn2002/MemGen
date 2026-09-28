@@ -44,13 +44,17 @@ def prepare_attention():
 
 
 def main():
-    global RUN
+    global RUN, ROOT, REPO
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", type=Path, default=RUN)
     parser.add_argument("--assets", nargs="+", default=["coast", "traveler", "boat"])
     parser.add_argument("--triangles", type=int, default=120000)
     parser.add_argument("--texture-size", type=int, default=2048)
+    parser.add_argument('--root', type=Path, default=ROOT)
     options = parser.parse_args()
+    ROOT = options.root
+    REPO = ROOT / 'vendor/trellis2-src'
+    sys.path.insert(0, str(REPO))
     RUN = options.run
     (RUN / "analysis").mkdir(parents=True, exist_ok=True)
     prepare_attention()

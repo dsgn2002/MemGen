@@ -1,0 +1,1 @@
+{"private":true,"scripts":{"build":"esbuild ../web/generation-viewer.js --bundle --minify --format=esm --outfile=../web/generation.bundle.js --legal-comments=eof"},"dependencies":{"three":"0.180.0"},"devDependencies":{"esbuild":"0.25.10"}}
