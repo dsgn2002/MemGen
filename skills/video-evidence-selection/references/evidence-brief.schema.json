@@ -1,0 +1,400 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "const": "proposed"
+    },
+    "user_confirmed": {
+      "const": false
+    },
+    "generation_started": {
+      "const": false
+    },
+    "source": {
+      "type": "object"
+    },
+    "intent": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "status": {
+          "const": "proposed"
+        },
+        "user_request": {
+          "type": "string",
+          "minLength": 1
+        },
+        "clarification_context": {
+          "type": "string"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "subject",
+                  "activity",
+                  "place",
+                  "relationship",
+                  "appearance",
+                  "creative_change",
+                  "exclusion"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "source_quote": {
+                "type": "string",
+                "minLength": 1
+              },
+              "needs_visual_evidence": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "description",
+              "priority",
+              "source_quote",
+              "needs_visual_evidence"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 16
+        },
+        "ambiguities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reference": {
+                "type": "string",
+                "minLength": 1
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "reference",
+              "question"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "moment_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "provenance": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status",
+        "user_request",
+        "clarification_context",
+        "requirements",
+        "ambiguities",
+        "moment_count",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "moments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hero_timestamp_s": {
+            "type": "number",
+            "minimum": 0
+          },
+          "reference_timestamps_s": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minItems": 1,
+            "maxItems": 3
+          },
+          "clip_range_s": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "frame_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "timestamp_s": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "image": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "supports": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 0,
+                  "maxItems": 100
+                },
+                "uncertain": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 0,
+                  "maxItems": 100
+                },
+                "observation": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "frame_id",
+                "timestamp_s",
+                "image",
+                "sha256",
+                "supports",
+                "uncertain",
+                "observation"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 3
+          },
+          "image": {
+            "type": "string",
+            "minLength": 1
+          },
+          "clip": {
+            "type": "string",
+            "minLength": 1
+          },
+          "clip_sha256": {
+            "type": "string",
+            "minLength": 1
+          },
+          "moment": {
+            "type": "string",
+            "minLength": 1
+          },
+          "people": {
+            "type": "string",
+            "minLength": 1
+          },
+          "setting": {
+            "type": "string",
+            "minLength": 1
+          },
+          "preserve": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "reference_limit": {
+            "type": "string",
+            "minLength": 1
+          },
+          "selection_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "supported_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "uncertain_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "quality": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "location",
+          "hero_timestamp_s",
+          "reference_timestamps_s",
+          "clip_range_s",
+          "references",
+          "image",
+          "clip",
+          "clip_sha256",
+          "moment",
+          "people",
+          "setting",
+          "preserve",
+          "reference_limit",
+          "selection_reason",
+          "supported_requirements",
+          "uncertain_requirements",
+          "quality"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 10
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "supported",
+              "uncertain",
+              "not_observed",
+              "creative_request",
+              "exclusion"
+            ]
+          },
+          "evidence_frame_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "id",
+          "description",
+          "status",
+          "evidence_frame_ids"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 16
+    },
+    "unresolved_requirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    "sampling": {
+      "type": "object"
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "user_confirmed",
+    "generation_started",
+    "source",
+    "intent",
+    "moments",
+    "requirements",
+    "unresolved_requirements",
+    "limitations",
+    "sampling",
+    "metrics",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

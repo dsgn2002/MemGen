@@ -27,3 +27,6 @@ souvenir-sample/assets/kenney/Models/GLTF format/*
 
 # Standalone published website checkout
 /share-site/
+
+# Local browser build dependencies
+**/node_modules/

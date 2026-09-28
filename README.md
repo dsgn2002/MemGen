@@ -2,7 +2,39 @@
 
 Turn selected travel moments into an interactive digital souvenir. The demos create a Sai Kung nature map with three boat companions and a Hong Kong tram street. Assets are generated on DGX Spark; the browser supports animation, camera controls, source memories, and daylight, sunset, and night atmospheres. MemGen is the repository name and earlier prototype codebase.
 
-A prototype for the NVIDIA DGX Spark hackathon. Our direction is to reuse existing NVIDIA agent tooling, official skills, local model serving recipes, and freely licensed meshes.
+A prototype for the NVIDIA DGX Spark hackathon, with repository-owned travel
+skills and a local multimodal generation pipeline built on existing models.
+
+## Reusable skills — release 1
+
+Two [portable Agent Skills](skills/README.md) now provide local-Qwen commands:
+
+- **Trip intent understanding:** convert requested highlights into source-quoted
+  requirements, separating creative changes from video facts.
+- **Video evidence selection:** discover and inspect frames across a local video,
+  select complementary supporting moments, and export a reviewable evidence brief.
+
+The output includes original frames, silent clips, timestamps, hashes, selection
+reasons, unresolved requirements, and inference traces. The skills do not launch
+3D generation or confirm a user choice. The upload application now provides the
+approved-selection handoff to generation; scene-fidelity review and the StepFun
+harness example remain deferred.
+See [validation and measured results](skills/evals/RESULTS.md).
+
+## Personal uploads — first application milestone
+
+The [private upload application](upload-app/README.md) accepts one video or a
+collection of photos plus requested highlights. A separate worker on Spark runs
+local Qwen to propose source moments and appearance/lighting options. Users review
+the evidence and save a selection tied to that analysis revision. Uploads can
+resume after a browser reload; jobs retain progress and diagnostics.
+
+After approval, an explicit Generate action runs local Qwen image styling and
+TRELLIS.2 mesh generation for the selected moments. The private browser viewer
+provides rotation, zoom, atmosphere controls and GLB downloads, with recorded
+analysis/generation timing. These are source-guided 3D miniatures, with inferred
+hidden geometry. Uploaded media stays separate from the published sample website.
+See [application checks](upload-app/RELEASE-CHECKS.md).
 
 ## Published demonstration
 
@@ -11,7 +43,7 @@ A prototype for the NVIDIA DGX Spark hackathon. Our direction is to reuse existi
 [Hong Kong by tram](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/?scene=city)
 
 The updated browser demo preserves the three boat passengers as separate generated
-assets and includes a city-travel sample with a moving double-decker tram. Both
+assets and includes a city-travel sample with a moving double-decker tram. Three city moment buttons switch between newly generated office towers, a rounded apartment corner, and older shopfronts, with matching silent source clips. Both
 scenes have daylight, golden sunset, and night atmosphere controls. The source
 frames, creative additions, and limitations are identified in each viewer.
 See [revision setup and validation](journey-demo/nature_map/web/README.md).
@@ -106,9 +138,10 @@ Outputs are written to `souvenir-sample/output/`. GLB uses metres and Y-up; STL 
 
 The review, local depth reconstruction, Omniverse integration and interactive
 player are implemented in `journey-demo/`. The earlier primitive WorldSpec
-compiler is retained as a historical prototype. General photo ingestion, visual
-repair, generalized scene selection, public sharing and persistent editing remain
-future work. The current preview is served from Spark through an SSH tunnel.
+compiler is retained as a historical prototype. The upload application adds
+photo/video ingestion and proposed source selection. Visual repair, generation
+from arbitrary approved uploads, public result sharing, and persistent scene
+editing remain future work. The current preview is served from Spark through an SSH tunnel.
 
 See [NVIDIA integration plan](docs/nvidia-integration.md) for the available tools, proposed roles, and implementation status.
 

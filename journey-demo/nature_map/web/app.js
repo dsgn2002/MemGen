@@ -56,8 +56,8 @@ const sky=new THREE.Mesh(new THREE.SphereGeometry(100,32,16),new THREE.ShaderMat
 const starGeo=new THREE.BufferGeometry(),starCoords=[];let seed=1926;function rand(){seed=(1664525*seed+1013904223)>>>0;return seed/4294967296}for(let i=0;i<900;i++){const a=rand()*Math.PI*2,y=.015+rand()*.94,r=Math.sqrt(1-y*y);starCoords.push(Math.cos(a)*r*85,y*85,Math.sin(a)*r*85)}starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starCoords,3));const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:'#dce7ff',size:.28,transparent:true,opacity:0,depthWrite:false}));scene.add(stars);
 const clock=new THREE.Clock(),glb=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),lamps=[],glows=[],assetNames=[],passengers=[],passengerPositions=[];
 let flight=null,loading=true,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,elapsed=0,preset='day',intensity=1,boat,tram,water,follow=false,triangles=0,loadError=null;
-// Boat laps the island: radius clears the 14-unit coast footprint, one lap ≈ 60 s, heading follows the tangent (bow assumed at local −z).
-const BOAT_RADIUS=11.5,BOAT_SPEED=Math.PI*2/60,BOAT_START=Math.atan2(6,-8),BOAT_HEADING=0;
+// Boat laps the island anticlockwise seen from above: radius clears the 14-unit coast footprint, one lap ≈ 20 s, heading follows the tangent (boat.web.glb's bow is at local +z, hence the half-turn).
+const BOAT_RADIUS=11.5,BOAT_SPEED=Math.PI*2/20,BOAT_START=Math.atan2(6,-8),BOAT_HEADING=Math.PI;
 const roofPlane=new THREE.Plane(new THREE.Vector3(0,-1,0),1.4);
 function std(color,extra={}){return new THREE.MeshStandardMaterial({color,roughness:.7,...extra})}
 function box(w,h,d,material,x=0,y=0,z=0,parent=root){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
@@ -101,8 +101,8 @@ function overview(){return portrait({target:new THREE.Vector3(0,city?2.5:1.4,0),
 function reset(){follow=false;flight=null;root.scale.setScalar(1);$('scale').value=1;$('scale-value').textContent='100%';const v=overview();camera.position.copy(v.camera);controls.target.copy(v.target);controls.update();}
 // A photo's view is either fixed in scene coordinates or, with follow:"subject", offsets from the moving boat or tram.
 function memoryView(i){const v=memories[i].view,k=root.scale.x,subject=city?tram:boat;if(v.follow&&subject){const p=subject.getWorldPosition(new THREE.Vector3()),off=new THREE.Vector3(...v.camera).multiplyScalar(k);
- // radial: camera numbers are [along the lap, up, out to sea], so the island never ends up between the camera and the boat.
- if(v.frame==='radial'){const r=new THREE.Vector3(p.x,0,p.z).normalize(),t=new THREE.Vector3(-r.z,0,r.x);off.set(0,off.y,0).addScaledVector(t,v.camera[0]*k).addScaledVector(r,v.camera[2]*k);}
+ // radial: camera numbers are [ahead along the lap, up, out to sea], so the island never ends up between the camera and the boat.
+ if(v.frame==='radial'){const r=new THREE.Vector3(p.x,0,p.z).normalize(),t=new THREE.Vector3(r.z,0,-r.x);off.set(0,off.y,0).addScaledVector(t,v.camera[0]*k).addScaledVector(r,v.camera[2]*k);}
  return portrait({target:p.clone().add(new THREE.Vector3(...v.target).multiplyScalar(k)),camera:p.add(off),follow:true});}return portrait({target:root.localToWorld(new THREE.Vector3(...v.target)),camera:root.localToWorld(new THREE.Vector3(...v.camera)),follow:false});}
 // Views are framed for a landscape screen; on a tall phone, step back so the subject still fits across.
 function portrait(d){d.camera.sub(d.target).multiplyScalar(Math.max(1,1/camera.aspect)).add(d.target);return d;}
@@ -124,7 +124,7 @@ function placeTags(){const w=$('stage').clientWidth,h=$('stage').clientHeight,ch
   tag.classList.toggle('is-occluded',occluded.has(i));tag.style.transform=`translate(${(ndc.x+1)/2*w}px,${(1-ndc.y)/2*h}px)`;});}
 function isInside(o,parent){for(;o;o=o.parent)if(o===parent)return true;return false;}
 function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.1);if(playing)elapsed+=dt;if(water)water.material.uniforms.time.value=elapsed;
- if(boat){const a=BOAT_START+elapsed*BOAT_SPEED;boat.position.set(Math.cos(a)*BOAT_RADIUS,-.38+Math.sin(elapsed*1.6)*.035,Math.sin(a)*BOAT_RADIUS);boat.rotation.y=Math.atan2(Math.sin(a),-Math.cos(a))+BOAT_HEADING;boat.rotation.z=Math.sin(elapsed*1.1)*.025;roofPlane.constant=(boat.position.y+1.35)*root.scale.y;}
+ if(boat){const a=BOAT_START-elapsed*BOAT_SPEED;boat.position.set(Math.cos(a)*BOAT_RADIUS,-.38+Math.sin(elapsed*1.6)*.035,Math.sin(a)*BOAT_RADIUS);boat.rotation.y=Math.atan2(-Math.sin(a),Math.cos(a))+BOAT_HEADING;boat.rotation.z=Math.sin(elapsed*1.1)*.025;roofPlane.constant=(boat.position.y+1.35)*root.scale.y;}
  if(tram){tram.position.z=Math.sin(elapsed*.12)*8;}
  // Photo flights ease from the current view to the photo's view; a moving subject keeps being tracked mid-flight.
  if(flight){flight.t=flight.duration?Math.min(1,flight.t+dt/flight.duration):1;const e=flight.t<.5?4*flight.t**3:1-(-2*flight.t+2)**3/2,d=flight.dest();camera.position.lerpVectors(flight.fromCamera,d.camera,e);controls.target.lerpVectors(flight.fromTarget,d.target,e);if(flight.t===1){follow=d.follow?flight.dest:false;flight=null;}}

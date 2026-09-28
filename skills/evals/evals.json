@@ -1,0 +1,15 @@
+{
+  "source": "Use the existing Sai Kung source video. No timestamps are passed to either skill.",
+  "cases": [
+    {
+      "id": "boat-companions",
+      "request": "Highlight the three companions together on the boat. Preserve their different visible outfits. Give the memory a golden sunset. Avoid the later farm scenes.",
+      "review_checks": ["Three companions are a required subject/relationship, not three unrelated detections.", "Sunset is a creative request, not a source claim.", "At least one selected source view supports the group on a boat."]
+    },
+    {
+      "id": "coastal-hike",
+      "request": "Highlight the coastal hiking trail and rocky coastline in Sai Kung. Include the visible hiker when supported. Avoid farm and indoor scenes.",
+      "review_checks": ["Hiking and coastal evidence differs from the boat request.", "Geographic certainty is not inferred just from the request.", "Hiker details are grounded in visible evidence."]
+    }
+  ]
+}

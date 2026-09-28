@@ -10,6 +10,7 @@ os.environ.update(HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1')
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--spec', type=Path, required=True)
+    parser.add_argument('--checkpoint', default='/home/Developer/travel_journey_map/models/qwen-image-edit-2511')
     args = parser.parse_args()
     spec = json.loads(args.spec.read_text())
     run = Path(spec['run'])
@@ -18,7 +19,7 @@ def main():
     import torch
     from PIL import Image
     from diffusers import QwenImageEditPlusPipeline
-    checkpoint = '/home/Developer/travel_journey_map/models/qwen-image-edit-2511'
+    checkpoint = args.checkpoint
     pipe = QwenImageEditPlusPipeline.from_pretrained(checkpoint, torch_dtype=torch.bfloat16, local_files_only=True).to('cuda')
     pipe.vae.enable_tiling()
     for index, item in enumerate(spec['assets']):
