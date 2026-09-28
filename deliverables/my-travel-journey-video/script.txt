@@ -1,0 +1,119 @@
+00:00:00,000 – 00:00:05,040
+EN: I have videos and photos from my Hong Kong trip.
+简体中文字幕: 我有一趟香港旅行的照片和视频。
+
+00:00:05,040 – 00:00:12,600
+EN: The boat ride, the tram, dinner, the lanterns—I don’t want them to disappear into a camera roll.
+简体中文字幕: 坐船、搭电车、聚餐，还有灯笼。我不想让这些回忆埋在相册里。
+
+00:00:12,600 – 00:00:18,000
+EN: Could you make me a 3D travel diary I can explore?
+简体中文字幕: 能把它们做成一本可以探索的3D旅行日记吗？
+
+00:00:18,000 – 00:00:22,304
+EN: This is My Travel Journey.
+简体中文字幕: 这就是 My Travel Journey。
+
+00:00:22,304 – 00:00:29,957
+EN: Its world map is an invitation to revisit places through interactive scenes.
+简体中文字幕: 世界地图让我们通过交互场景重游各地。
+
+00:00:29,957 – 00:00:40,000
+EN: Let’s open two existing Hong Kong examples, then see how a traveler can create a personal memory.
+简体中文字幕: 先看看两个已有的香港示例，再看看旅行者如何制作自己的回忆。
+
+00:00:40,000 – 00:00:47,660
+EN: In Sai Kung, a boat moves beside a miniature coast.
+简体中文字幕: 在西贡，一艘小船驶过微缩海岸。
+
+00:00:47,660 – 00:00:56,962
+EN: Three companions appear aboard it, guided by details in the original travel footage.
+简体中文字幕: 船上的三位旅伴参考了原始旅行视频中的细节。
+
+00:00:56,962 – 00:01:09,000
+EN: We can turn the camera, follow the boat, and compare this interpretation with the frame that inspired it.
+简体中文字幕: 我们可以旋转视角、跟随小船，并与对应的原始画面比较。
+
+00:01:09,000 – 00:01:15,240
+EN: A memory is more than a still image here.
+简体中文字幕: 在这里，回忆不只是一张静态照片。
+
+00:01:15,240 – 00:01:23,880
+EN: The traveler can change the atmosphere and move between moments from the source video.
+简体中文字幕: 旅行者可以改变光照氛围，也可以切换原视频中的不同片段。
+
+00:01:23,880 – 00:01:33,000
+EN: Sunset and night are creative lighting choices; the original frames remain visible beside the scene.
+简体中文字幕: 日落和夜景是创意光照效果，原始画面仍可随时查看。
+
+00:01:33,000 – 00:01:40,808
+EN: Across Hong Kong, another public example follows a double-decker tram.
+简体中文字幕: 来到香港的另一侧，第二个公开示例围绕一辆双层电车展开。
+
+00:01:40,808 – 00:01:53,077
+EN: Selecting different video moments changes the generated buildings around it—from a modern avenue to apartments and older shopfronts.
+简体中文字幕: 选择不同的视频片段，周围生成的建筑也会变化：现代街道、公寓转角，以及旧式店铺。
+
+00:01:53,077 – 00:02:02,000
+EN: The tram and source clips connect the changing scene to the journey.
+简体中文字幕: 电车和原片段把场景与旅程联系起来。
+
+00:02:02,000 – 00:02:06,694
+EN: Those two scenes are curated demonstrations.
+简体中文字幕: 刚才的两个场景是经过整理的演示作品。
+
+00:02:06,694 – 00:02:18,898
+EN: For a personal trip, the traveler uploads a video or photos and describes what matters—perhaps a shared dinner and a lantern display.
+简体中文字幕: 制作个人旅程时，旅行者上传视频或照片，并说明最在意的内容，例如一次聚餐和一处灯笼展示。
+
+00:02:18,898 – 00:02:25,000
+EN: The system keeps the original media available for review.
+简体中文字幕: 原始素材会保留，供用户核对。
+
+00:02:25,000 – 00:02:33,593
+EN: On DGX Spark, local Qwen examines the request and samples the footage.
+简体中文字幕: 在 DGX Spark 上，本地 Qwen 理解用户请求并分析视频采样画面。
+
+00:02:33,593 – 00:02:43,796
+EN: Our two reusable skills turn the traveler’s priorities into requirements and find supporting video evidence.
+简体中文字幕: 我们开发的两项可复用技能把旅行者的重点转成明确需求，并寻找对应的视频证据。
+
+00:02:43,796 – 00:02:54,000
+EN: The traveler checks the proposed moments, chooses what to keep, and explicitly starts 3D generation.
+简体中文字幕: 用户核对推荐片段、选择要保留的回忆，然后主动启动3D生成。
+
+00:02:54,000 – 00:03:00,667
+EN: The heavy work runs locally on our NVIDIA DGX Spark.
+简体中文字幕: 主要计算任务在我们的 NVIDIA DGX Spark 上本地完成。
+
+00:03:00,667 – 00:03:12,571
+EN: Its GB10 Grace Blackwell chip has 128 gigabytes of unified memory and offers up to one petaflop of FP4 AI compute.
+简体中文字幕: 它搭载 GB10 Grace Blackwell 芯片，拥有128GB统一内存，FP4 AI算力最高可达1 PFLOP。
+
+00:03:12,571 – 00:03:24,000
+EN: We use that capacity for video understanding, image styling, and textured 3D mesh generation, running the large models in sequence.
+简体中文字幕: 我们用它进行视频理解、图像风格化和带纹理的3D网格生成，并依次运行这些大型模型。
+
+00:03:24,000 – 00:03:33,966
+EN: Here are two selected memories from a real uploaded video: a dining scene and a lantern display.
+简体中文字幕: 这是一次真实视频上传后选出的两段回忆：聚餐场景和灯笼展示。
+
+00:03:33,966 – 00:03:44,407
+EN: Each becomes a textured miniature that the traveler can rotate and relight, with its source frame alongside it.
+简体中文字幕: 它们各自变成可旋转、可调整光照的纹理微缩模型，旁边还能看到原始画面。
+
+00:03:44,407 – 00:03:52,000
+EN: The refined character and lantern animations are curated additions to this demonstration.
+简体中文字幕: 人物与灯笼的细化动画是本次演示中人工整理的补充。
+
+00:03:52,000 – 00:04:00,235
+EN: These are source-guided interpretations, not exact reconstructions of places or people.
+简体中文字幕: 这些作品以原始素材为依据进行创作，并非对地点或人物的精确重建。
+
+00:04:00,235 – 00:04:11,765
+EN: What matters is that the traveler chooses the memories, sees the evidence, and can explore the result.
+简体中文字幕: 旅行者可以自己选择回忆、查看依据，并探索生成的结果。
+
+00:04:11,765 – 00:04:20,000
+EN: My Travel Journey turns a request into a place to revisit.
+简体中文字幕: My Travel Journey，让一句请求成为可以重游的空间。
