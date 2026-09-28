@@ -2,8 +2,8 @@
 
 - 25 shared skill tests: structured intent, source linkage, evidence selection,
   bounded corrections and recovery of real source-linked observations.
-- 16 application tests: upload/resume, media checks, owner isolation, approval
-  binding, generation queue guards, changed-source rejection and cancellation.
+- 17 application tests: upload/resume, media checks, owner isolation, approval
+  binding, generation queue guards, changed-source rejection, cancellation and source-bound presentation edits.
 - Four upload-client checks: adaptive transfer, slow links, lost acknowledgements
   and altered reselected files.
 - Live local-Qwen upload analysis produced three proposed moments and style
@@ -28,3 +28,17 @@ overflow. Browser checks inspect material textures and console failures as well
 as geometry and page errors. Visual screenshots confirmed full-color surfaces.
 Private run identifiers, uploaded sources and local diagnostic reports are excluded
 from this public release record.
+
+## Curated geometry refinement
+
+The restaurant presentation uses four generic CC0 Quaternius characters (two
+male and two female), each with its own skeletal Idle animation. The lantern
+presentation uses ten separate round/fish lanterns with gentle sway. These are
+manual scene assemblies following user feedback, not additional model inference
+or automatic repair for arbitrary footage. Their source-bound manifests are
+private; the original generated meshes and inference timing remain unchanged.
+
+Local and deployed Chrome checks passed for both assemblies, four skeletal idle
+animations, ten swaying lanterns, pause/resume, original/refined switching,
+atmosphere controls, and phone layout without overflow or page errors.
+Screenshots of the deployed scenes were visually inspected.

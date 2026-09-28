@@ -235,3 +235,26 @@ Three.js and Meshopt decoder license notices are in `web/THIRD-PARTY-LICENSES.tx
 Generated assets, database, invitations, source uploads and logs must stay outside
 Git. The `/static/generation.html` page permits WebAssembly for Meshopt decoding;
 all scripts and assets are otherwise served from this application origin.
+
+### Curated scene refinements
+
+A generated scene may have a separate `presentation.json` beside `result.json`.
+This is an explicit, curated presentation edit; it does not change the source
+brief, saved approval, original mesh, generation output, or inference timings.
+The API binds each edit to the asset ID and both its source and mesh SHA-256.
+Unsupported presets or mismatched hashes are rejected.
+
+Version 1 supports `dining-characters-v1` (a modular cafe with generic animated
+male/female adults) and `lantern-display-v1` (separate round/fish lanterns with
+subtle sway). The current uploaded demo uses these edits following user feedback.
+The viewer offers the original generated mesh for comparison and download, plus
+an animation toggle; reduced-motion preferences default to paused animation.
+The scene assembly and character placement are manually designed. This is not
+automatic scene segmentation or replacement for arbitrary uploaded footage.
+Generic character assets and their CC0 provenance are in `web/characters/`.
+
+Manifest shape (hashes must match the real result):
+
+```json
+{"version":1,"assets":[{"id":"moment-01","source_sha256":"…","mesh_sha256":"…","preset":"dining-characters-v1"}]}
+```

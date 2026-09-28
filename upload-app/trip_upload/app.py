@@ -15,6 +15,7 @@ from .config import ROOT, Settings
 from .store import Store, uid, now, digest
 from .media import inspect_upload, sha256
 from .generation import available as generation_available
+from .presentation import attach_presentation
 
 
 class Body(BaseModel):
@@ -406,7 +407,9 @@ def create_app(settings=None):
             row = db.execute('SELECT * FROM generations WHERE id=? AND project=?', (generation,project)).fetchone()
             if not row or row['status'] != 'ready':
                 raise HTTPException(409, 'Generation is not ready.')
-        return json.loads((store.generation_dir(project,generation)/'result.json').read_text())
+        directory = store.generation_dir(project,generation)
+        result = json.loads((directory/'result.json').read_text())
+        return attach_presentation(result, directory/'presentation.json')
 
     @app.get('/api/projects/{project}/generations/{generation}/assets/{name}')
     def generation_asset(project: str, generation: str, name: str, who=Depends(owner)):
