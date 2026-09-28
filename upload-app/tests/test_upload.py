@@ -38,6 +38,14 @@ class FixtureModel:
 
 
 class UploadTests(unittest.TestCase):
+    def test_viewer_allows_embedded_textures_only_on_generation_page(self):
+        policy=self.client.get('/static/generation.html').headers['Content-Security-Policy']
+        self.assertIn("connect-src 'self' blob:", policy)
+        self.assertIn("script-src 'self' 'wasm-unsafe-eval'", policy)
+        upload_policy=self.client.get('/').headers['Content-Security-Policy']
+        self.assertNotIn('connect-src', upload_policy)
+        self.assertNotIn('wasm-unsafe-eval', upload_policy)
+
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory()
         self.settings=Settings(Path(self.tmp.name), model='/explicit/test/checkpoint', secure_cookie=False, coarse=3, refinement=0)

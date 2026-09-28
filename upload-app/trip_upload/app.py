@@ -76,6 +76,8 @@ def create_app(settings=None):
         response.headers['Content-Security-Policy'] = "default-src 'self'; img-src 'self' blob:; media-src 'self' blob:; script-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
         if request.url.path == '/static/generation.html':
             response.headers['Content-Security-Policy'] = response.headers['Content-Security-Policy'].replace("script-src 'self'", "script-src 'self' 'wasm-unsafe-eval'")
+            # GLTFLoader fetches embedded texture buffer views through blob URLs.
+            response.headers['Content-Security-Policy'] += "; connect-src 'self' blob:"
         return response
 
     def owner(request: Request):
