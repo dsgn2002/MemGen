@@ -8,35 +8,55 @@ import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 
 const $=id=>document.getElementById(id), city=new URLSearchParams(location.search).get('scene')==='city';
+let tripLoadError=null;
+const trips=await fetch('trips.json').then(r=>{if(!r.ok)throw new Error('Trip details unavailable');return r.json()}).catch(error=>{tripLoadError=error.message;$('load-text').textContent='Trip details could not load. Refresh to retry.';return null});
+if(!trips){window.travelSceneState=()=>({error:tripLoadError});}else{
+const tripId=city?'city':'coast',trip=trips.trips.find(t=>t.id===tripId),region=trips.regions.find(r=>r.id===trip.region),memories=trip.memories,n=memories.length;
+document.body.dataset.trip=tripId;document.title=`${trip.title}: My Travel Journey`;
+$('chapter').textContent=trip.chapter;$('title').textContent=trip.title;$('trip-date').textContent=trip.dateLabel;$('trip-date').setAttribute('datetime',trip.date);$('date-note').textContent=trip.dateNote||'';
+$('crumb-region').textContent=region?.name||'';$('crumb-place').textContent=trip.chapter;if(!region)document.querySelectorAll('.crumb-region').forEach(e=>e.hidden=true);
+$('world-link').href=`world.html?focus=${tripId}`;$('loader-title').textContent=trip.title;if(trip.cover)$('loader-cover').src=trip.cover;
+const tripSwitch=$('trip-switch'),regionTrips=trips.trips.filter(t=>t.status==='live'&&t.region===trip.region);regionTrips.forEach(t=>{const a=document.createElement('a');a.href=t.scene;a.dataset.trip=t.id;a.textContent=t.chapter;if(t.id===tripId)a.setAttribute('aria-current','page');tripSwitch.appendChild(a)});if(regionTrips.length<2)tripSwitch.hidden=true;
+if(city){$('focus').textContent='Follow the tram';$('canopy-control').hidden=true;}
 const sourceCity='https://commons.wikimedia.org/wiki/File:Hong_Kong_Trams,_September_2009-UKNqZzl2cu8.webm';
-const memories=city?[
- {image:'city/frame-50.jpg',text:'0:50 · A double-decker tram travels between dense apartment blocks and shopfronts.'},
- {image:'city/frame-190.jpg',text:'3:10 · Tram tracks thread through the Hong Kong streetscape.'},
- {image:'city/frame-435.jpg',text:'7:15 · A pale blue double-decker tram rounds a street corner.'}
-]:[
- {image:'memories/frame-60.jpg',text:'1:00 · Three companions aboard the green-canopy boat: white shirt, dark sleeveless top, and orange jacket.'},
- {image:'memories/frame-80.jpg',text:'1:20 · High Island Reservoir, with stonework between the hills and turquoise water.'},
- {image:'memories/frame-98.jpg',text:'1:38 · A traveler on the MacLehose coastal path above the bay.'}
-];
-$(city?'city-link':'coast-link').setAttribute('aria-current','page');
-if(city){$('chapter').textContent='02 / HONG KONG ISLAND';$('title').textContent='A city in motion.';$('focus').textContent='Follow the tram';$('canopy-control').hidden=true;}
 $('about').textContent=city?'A stylized recomposition of a 2009 Hong Kong tram-travel video. The buildings and tram were generated from source frames. Street layout, lights, and illustrative pedestrians are composed for this demo; this is not a measured reconstruction.':'Three separate reference-conditioned passenger meshes restore the visible group aboard the boat. Their clothing is approximate, and their faces are stylized. The landscape is an artistic composition. Open canopy view removes the roof for inspection.';
 $('credits').innerHTML=city?`Source: <a href="${sourceCity}" target="_blank" rel="noopener">Hong Kong Trams, September 2009</a> by michaelinlondon, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>. Frames extracted and transformed into stylized assets.`:'Source: <a href="https://www.youtube.com/watch?v=9jtnoejpLcU" target="_blank" rel="noopener">The Travel Intern · Hong Kong Outdoor Adventure</a>. Source footage and generated assets retain their respective rights.';
-let selected=0;
-function selectMemory(i){selected=i;$('memory-image').src=memories[i].image;$('memory-image').alt=memories[i].text;$('memory-caption').textContent=memories[i].text;document.querySelectorAll('[data-memory]').forEach(b=>b.setAttribute('aria-pressed',Number(b.dataset.memory)===i));}
-memories.forEach((m,i)=>{const b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0');b.dataset.memory=i;b.ariaLabel=m.text;b.onclick=()=>selectMemory(i);$('memories').appendChild(b)});selectMemory(0);
+let selected=0,shown=false;
+const memoriesList=$('memories');$('film-count').textContent=n;
+memories.forEach((m,i)=>{const li=document.createElement('li'),b=document.createElement('button'),img=document.createElement('img'),stamp=document.createElement('span');b.className='print';b.dataset.memory=i;b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',`Photo ${i+1} of ${n}, ${m.time}: ${m.caption}`);img.src=m.image;img.alt='';img.loading='lazy';img.decoding='async';stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.textContent=m.time;b.append(img,stamp);li.appendChild(b);memoriesList.appendChild(li)});
+// Each photo with a `view` also gets a tag floating in the 3D scene where it was taken.
+const tags=memories.map((m,i)=>{if(!m.view)return null;const b=document.createElement('button'),img=document.createElement('img'),stamp=document.createElement('span');b.className='tag is-hidden';b.dataset.memory=i;b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',`Go to where photo ${i+1} was taken: ${m.caption}`);img.src=m.image;img.alt='';img.decoding='async';stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.textContent=m.time;b.append(img,stamp);b.onclick=()=>selectMemory(i);$('tags').appendChild(b);return b});
+function renderMemory(i){selected=i;const m=memories[i];$('film-time').textContent=m.time;$('film-caption').textContent=m.caption;$('pc-image').src=m.image;$('pc-image').alt=m.caption;$('memory-image').src=m.image;$('memory-image').alt=m.caption;$('memory-caption').textContent=m.caption;$('lb-time').textContent=m.time;$('lb-count').textContent=`${i+1} of ${n}`;$('lb-prev').disabled=i===0;$('lb-next').disabled=i===n-1;}
+function markSelected(i){document.querySelectorAll('[data-memory]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.memory===String(i))));}
+function selectMemory(i,{fly=true}={}){renderMemory(i);markSelected(i);shown=true;$('print-card').hidden=false;const button=document.querySelector(`#memories [data-memory="${i}"]`),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;button.scrollIntoView({block:'nearest',inline:'nearest',behavior:reduced?'auto':'smooth'});if(fly&&memories[i].view&&!loading)flyTo(()=>memoryView(i));}
+function putAwayMemory(){shown=false;$('print-card').hidden=true;markSelected(-1);}
+let lastClicked=null,lightboxReturnFocus=null;
+function restoreLightboxFocus(){if(lightboxReturnFocus?.isConnected)lightboxReturnFocus.focus();lightboxReturnFocus=null;}
+function openLightbox(){const dialog=$('lightbox');if(!dialog.open){lightboxReturnFocus=document.activeElement;dialog.showModal();}$('lb-close').focus();}
+memoriesList.addEventListener('click',e=>{const b=e.target.closest('button[data-memory]');if(!b)return;const i=Number(b.dataset.memory);if(i===selected&&shown&&lastClicked===i)openLightbox();else selectMemory(i);lastClicked=i;});
+memoriesList.addEventListener('keydown',e=>{const b=e.target.closest('button[data-memory]');if(!b)return;const step={ArrowLeft:-1,ArrowUp:-1,ArrowRight:1,ArrowDown:1}[e.key];if(!step)return;e.preventDefault();const next=Math.max(0,Math.min(n-1,Number(b.dataset.memory)+step));selectMemory(next);document.querySelector(`#memories [data-memory="${next}"]`).focus();});
+$('open-lightbox').onclick=openLightbox;$('pc-photo').onclick=openLightbox;$('pc-close').onclick=()=>{putAwayMemory();document.querySelector(`#memories [data-memory="${selected}"]`).focus();};
+$('film-toggle').onclick=()=>{const body=$('film-body'),hidden=!body.hidden;body.hidden=hidden;$('film-toggle').setAttribute('aria-expanded',String(!hidden));$('film-toggle').textContent=hidden?'Show':'Hide';$('film').toggleAttribute('data-collapsed',hidden);};
+const lightbox=$('lightbox');$('lb-close').onclick=()=>{if(lightbox.open)lightbox.close();restoreLightboxFocus();};lightbox.addEventListener('close',restoreLightboxFocus);lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close();});$('lb-prev').onclick=()=>selectMemory(Math.max(0,selected-1));$('lb-next').onclick=()=>selectMemory(Math.min(n-1,selected+1));lightbox.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();selectMemory(Math.max(0,selected-1));}else if(e.key==='ArrowRight'){e.preventDefault();selectMemory(Math.min(n-1,selected+1));}});
+const lbPrint=document.querySelector('.lb-print');let swipeStart=null;lbPrint.addEventListener('pointerdown',e=>{swipeStart={x:e.clientX,y:e.clientY};});lbPrint.addEventListener('pointerup',e=>{if(!swipeStart)return;const dx=e.clientX-swipeStart.x,dy=e.clientY-swipeStart.y;swipeStart=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))selectMemory(Math.max(0,Math.min(n-1,selected+(dx<0?1:-1))));});
+renderMemory(0);
+
+const panelToggles={atmos:$('atmos-toggle'),info:$('info-toggle')};
+function setPanel(name,open,restoreFocus=false){if(open){const other=name==='atmos'?'info':'atmos';$(other).hidden=true;panelToggles[other].setAttribute('aria-expanded','false');}$(name).hidden=!open;panelToggles[name].setAttribute('aria-expanded',String(open));if(restoreFocus)panelToggles[name].focus();}
+$('atmos').hidden=true;$('info').hidden=true;panelToggles.atmos.setAttribute('aria-expanded',String(!$('atmos').hidden));panelToggles.info.setAttribute('aria-expanded','false');
+panelToggles.atmos.onclick=()=>setPanel('atmos',$('atmos').hidden);panelToggles.info.onclick=()=>setPanel('info',$('info').hidden);document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>setPanel(b.dataset.close,false,true));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lightbox.open){const name=!$('atmos').hidden?'atmos':!$('info').hidden?'info':null;if(name)setPanel(name,false,true);}});
 
 const scene=new THREE.Scene();scene.fog=new THREE.Fog('#c4e4df',35,100);
 const renderer=new THREE.WebGLRenderer({canvas:$('canvas'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.localClippingEnabled=true;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
-const camera=new THREE.PerspectiveCamera(42,1,.05,180);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.minDistance=3;controls.maxDistance=48;controls.maxPolarAngle=Math.PI*.49;
+const camera=new THREE.PerspectiveCamera(42,1,.05,180);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.minDistance=1.5;controls.maxDistance=48;controls.maxPolarAngle=Math.PI*.49;
 const root=new THREE.Group();scene.add(root);const hemi=new THREE.HemisphereLight('#dcefff','#577b69',2);scene.add(hemi);const sun=new THREE.DirectionalLight('#fff0d3',3);sun.position.set(-12,20,10);sun.castShadow=true;sun.shadow.mapSize.set(innerWidth<700?1024:2048,innerWidth<700?1024:2048);Object.assign(sun.shadow.camera,{left:-22,right:22,top:22,bottom:-22,near:.5,far:90});sun.shadow.bias=-.0003;scene.add(sun);const fill=new THREE.DirectionalLight('#c8e3ef',.7);fill.position.set(15,10,20);scene.add(fill);
 const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),.25,.65,1.1);composer.addPass(bloom);composer.addPass(new OutputPass());
 const skyUniforms={top:{value:new THREE.Color('#419bc7')},horizon:{value:new THREE.Color('#d7eee2')},sunColor:{value:new THREE.Color('#fff8d8')},sunDirection:{value:new THREE.Vector3(-.6,.7,-.3).normalize()},disc:{value:1}};
 const sky=new THREE.Mesh(new THREE.SphereGeometry(100,32,16),new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,uniforms:skyUniforms,vertexShader:'varying vec3 vDirection; void main(){vDirection=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying vec3 vDirection;uniform vec3 top,horizon,sunColor,sunDirection;uniform float disc;void main(){vec3 d=normalize(vDirection);float h=pow(max(d.y,0.),.6);vec3 c=mix(horizon,top,clamp(h,0.,1.));float s=max(dot(d,sunDirection),0.);c+=sunColor*(smoothstep(.99965,.9999,s)*2.+pow(s,90.)*.08)*disc;gl_FragColor=vec4(c,1.);#include <tonemapping_fragment>\n#include <colorspace_fragment>}',toneMapped:true}));sky.material.fragmentShader=sky.material.fragmentShader.replace(';#include',';\n#include');scene.add(sky);
 const starGeo=new THREE.BufferGeometry(),starCoords=[];let seed=1926;function rand(){seed=(1664525*seed+1013904223)>>>0;return seed/4294967296}for(let i=0;i<900;i++){const a=rand()*Math.PI*2,y=.015+rand()*.94,r=Math.sqrt(1-y*y);starCoords.push(Math.cos(a)*r*85,y*85,Math.sin(a)*r*85)}starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starCoords,3));const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:'#dce7ff',size:.28,transparent:true,opacity:0,depthWrite:false}));scene.add(stars);
 const clock=new THREE.Clock(),glb=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),lamps=[],glows=[],assetNames=[],passengers=[],passengerPositions=[];
-let loading=true,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,elapsed=0,preset='day',intensity=1,boat,tram,water,follow=false,triangles=0,loadError=null;
-// Boat laps the island: radius clears the 14-unit coast footprint, one lap ≈ 20 s, heading follows the tangent (boat.web.glb's bow is at local +z, hence the half-turn).
+let flight=null,loading=true,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,elapsed=0,preset='day',intensity=1,boat,tram,water,follow=false,triangles=0,loadError=null;
+// Boat laps the island anticlockwise seen from above: radius clears the 14-unit coast footprint, one lap ≈ 20 s, heading follows the tangent (boat.web.glb's bow is at local +z, hence the half-turn).
 const BOAT_RADIUS=11.5,BOAT_SPEED=Math.PI*2/20,BOAT_START=Math.atan2(6,-8),BOAT_HEADING=Math.PI;
 const roofPlane=new THREE.Plane(new THREE.Vector3(0,-1,0),1.4);
 function std(color,extra={}){return new THREE.MeshStandardMaterial({color,roughness:.7,...extra})}
@@ -77,19 +97,39 @@ async function loadCity(){
  const people=[];for(const name of ['passenger-white','passenger-dark','passenger-orange'])people.push(await model(name,.65,'height'));
  for(let i=0;i<12;i++){const p=people[i%3].clone(true);p.position.set((i%2?-1:1)*(3.65+(i%3)*.22),.16,-10+(i*1.7)%20);p.rotation.y=i%2?0:Math.PI;root.add(p);}
 }
-function reset(){follow=false;root.scale.setScalar(1);$('scale').value=1;$('scale-value').textContent='100%';camera.position.set(...(city?[15,22,28]:[19,9,24]));controls.target.set(0,city?2.5:1.4,0);camera.position.sub(controls.target).multiplyScalar(Math.max(1,1/camera.aspect)).add(controls.target);controls.update();}
-function focusSubject(){follow=true;selectMemory(0);const target=city?tram:boat;if(target){const p=target.getWorldPosition(new THREE.Vector3());controls.target.copy(p).add(new THREE.Vector3(0,city?1.5:.85,0));camera.position.copy(p).add(new THREE.Vector3(city?3.1:4.2,city?3:2.4,city?6.2:5.6));controls.update();}}
-$('focus').onclick=focusSubject;$('reset').onclick=reset;controls.addEventListener('start',()=>follow=false);
+function overview(){return portrait({target:new THREE.Vector3(0,city?2.5:1.4,0),camera:new THREE.Vector3(...(city?[15,22,28]:[19,9,24])),follow:false});}
+function reset(){follow=false;flight=null;root.scale.setScalar(1);$('scale').value=1;$('scale-value').textContent='100%';const v=overview();camera.position.copy(v.camera);controls.target.copy(v.target);controls.update();}
+// A photo's view is either fixed in scene coordinates or, with follow:"subject", offsets from the moving boat or tram.
+function memoryView(i){const v=memories[i].view,k=root.scale.x,subject=city?tram:boat;if(v.follow&&subject){const p=subject.getWorldPosition(new THREE.Vector3()),off=new THREE.Vector3(...v.camera).multiplyScalar(k);
+ // radial: camera numbers are [ahead along the lap, up, out to sea], so the island never ends up between the camera and the boat.
+ if(v.frame==='radial'){const r=new THREE.Vector3(p.x,0,p.z).normalize(),t=new THREE.Vector3(r.z,0,-r.x);off.set(0,off.y,0).addScaledVector(t,v.camera[0]*k).addScaledVector(r,v.camera[2]*k);}
+ return portrait({target:p.clone().add(new THREE.Vector3(...v.target).multiplyScalar(k)),camera:p.add(off),follow:true});}return portrait({target:root.localToWorld(new THREE.Vector3(...v.target)),camera:root.localToWorld(new THREE.Vector3(...v.camera)),follow:false});}
+// Views are framed for a landscape screen; on a tall phone, step back so the subject still fits across.
+function portrait(d){d.camera.sub(d.target).multiplyScalar(Math.max(1,1/camera.aspect)).add(d.target);return d;}
+function tagPoint(i){const v=memories[i].view,subject=city?tram:boat;if(v.follow&&subject)return subject.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(...v.tag).multiplyScalar(root.scale.x));return root.localToWorld(new THREE.Vector3(...v.tag));}
+function flyTo(dest){follow=false;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;flight={dest,fromCamera:camera.position.clone(),fromTarget:controls.target.clone(),t:0,duration:reduced?0:1.6};}
+function focusSubject(){selectMemory(0);}
+function resetView(){putAwayMemory();flyTo(overview);}
+$('focus').onclick=focusSubject;$('reset').onclick=resetView;controls.addEventListener('start',()=>{follow=false;flight=null;});
 function motionLabel(){$('motion').textContent=playing?'Pause motion':'Play motion';$('motion').setAttribute('aria-pressed',playing)}$('motion').onclick=()=>{playing=!playing;motionLabel()};motionLabel();
 document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>lighting(b.dataset.preset));$('intensity').oninput=e=>{intensity=+e.target.value;$('intensity-value').textContent=Math.round(intensity*100)+'%';lighting(preset)};$('scale').oninput=e=>{root.scale.setScalar(+e.target.value);$('scale-value').textContent=Math.round(e.target.value*100)+'%'};
 $('canopy').onchange=()=>{if(boat)boat.children[0].traverse(o=>{if(o.isMesh){o.material.clippingPlanes=$('canopy').checked?[roofPlane]:[];o.material.needsUpdate=true;}})};
-function resize(){const w=$('stage').clientWidth,h=$('stage').clientHeight;renderer.setSize(w,h,false);composer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix()}new ResizeObserver(resize).observe($('stage'));resize();reset();lighting('day');
+function resize(){const w=$('stage').clientWidth,h=$('stage').clientHeight;renderer.setSize(w,h,false);composer.setSize(w,h);
+ // Shift the picture centre away from the photo rail (left on desktop, bottom strip on phones) so the scene sits in the open space.
+ const film=$('film'),rail=innerWidth>=1000,R=rail?148:0,B=rail?0:Math.round(film.getBoundingClientRect().height)+10;camera.aspect=(w+R)/(h+B);camera.setViewOffset(w+R,h+B,0,B,w,h);camera.updateProjectionMatrix()}{const ro=new ResizeObserver(resize);ro.observe($('stage'));ro.observe($('film'));}resize();reset();lighting('day');
 try{if(city)await loadCity();else await loadCoast();loading=false;$('loader').hidden=true;lighting('day')}catch(error){loadError=error.message;$('load-text').textContent='The scene could not load. Refresh to retry. '+error.message;console.error(error)}
-let lastSubject=null;
+let tagFrame=0;const tagRay=new THREE.Raycaster(),occluded=new Set();
+function placeTags(){const w=$('stage').clientWidth,h=$('stage').clientHeight,check=++tagFrame%10===0;tags.forEach((tag,i)=>{if(!tag)return;if(loading){tag.classList.add('is-hidden');return;}const p=tagPoint(i),ndc=p.clone().project(camera),off=ndc.z>1||Math.abs(ndc.x)>1.05||Math.abs(ndc.y)>1.05;tag.classList.toggle('is-hidden',off);if(off)return;
+  if(check){const dir=p.clone().sub(camera.position),dist=dir.length();tagRay.set(camera.position,dir.normalize());tagRay.far=dist-.3;const subject=city?tram:boat,hit=tagRay.intersectObject(root,true).find(h=>!(memories[i].view.follow&&subject&&isInside(h.object,subject)));hit?occluded.add(i):occluded.delete(i);}
+  tag.classList.toggle('is-occluded',occluded.has(i));tag.style.transform=`translate(${(ndc.x+1)/2*w}px,${(1-ndc.y)/2*h}px)`;});}
+function isInside(o,parent){for(;o;o=o.parent)if(o===parent)return true;return false;}
 function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.1);if(playing)elapsed+=dt;if(water)water.material.uniforms.time.value=elapsed;
- if(boat){const a=BOAT_START+elapsed*BOAT_SPEED;boat.position.set(Math.cos(a)*BOAT_RADIUS,-.38+Math.sin(elapsed*1.6)*.035,Math.sin(a)*BOAT_RADIUS);boat.rotation.y=Math.atan2(Math.sin(a),-Math.cos(a))+BOAT_HEADING;boat.rotation.z=Math.sin(elapsed*1.1)*.025;roofPlane.constant=(boat.position.y+1.35)*root.scale.y;}
+ if(boat){const a=BOAT_START-elapsed*BOAT_SPEED;boat.position.set(Math.cos(a)*BOAT_RADIUS,-.38+Math.sin(elapsed*1.6)*.035,Math.sin(a)*BOAT_RADIUS);boat.rotation.y=Math.atan2(-Math.sin(a),Math.cos(a))+BOAT_HEADING;boat.rotation.z=Math.sin(elapsed*1.1)*.025;roofPlane.constant=(boat.position.y+1.35)*root.scale.y;}
  if(tram){tram.position.z=Math.sin(elapsed*.12)*8;}
- const subject=city?tram:boat;if(follow&&subject){const p=subject.getWorldPosition(new THREE.Vector3());if(lastSubject)camera.position.add(p.clone().sub(lastSubject));controls.target.copy(p).add(new THREE.Vector3(0,city?1.5:.85,0));lastSubject=p;}else lastSubject=null;
- controls.update();sky.position.copy(camera.position);stars.position.copy(camera.position);composer.render();}
+ // Photo flights ease from the current view to the photo's view; a moving subject keeps being tracked mid-flight.
+ if(flight){flight.t=flight.duration?Math.min(1,flight.t+dt/flight.duration):1;const e=flight.t<.5?4*flight.t**3:1-(-2*flight.t+2)**3/2,d=flight.dest();camera.position.lerpVectors(flight.fromCamera,d.camera,e);controls.target.lerpVectors(flight.fromTarget,d.target,e);if(flight.t===1){follow=d.follow?flight.dest:false;flight=null;}}
+ if(follow){const d=follow();camera.position.copy(d.camera);controls.target.copy(d.target);}
+ controls.update();sky.position.copy(camera.position);stars.position.copy(camera.position);placeTags();composer.render();}
 animate();
-window.travelSceneState=()=>({scene:city?'city':'coast',loading,error:loadError,preset,intensity,playing,time:elapsed,scale:root.scale.x,assets:assetNames,triangles,passengerCount:passengers.length,passengerPositions,attachedToBoat:passengers.every(p=>p.parent===boat),canopyOpen:$('canopy').checked,stars:stars.material.opacity,lights:lamps.map(l=>l.light.intensity),camera:camera.position.toArray(),selectedMemory:selected,subjectPosition:(city?tram:boat)?.position.toArray(),sunIntensity:sun.intensity,illustrativePedestrians:city?12:0});
+window.travelSceneState=()=>({scene:city?'city':'coast',trip:tripId,loading,error:loadError,preset,intensity,playing,time:elapsed,scale:root.scale.x,assets:assetNames,triangles,passengerCount:passengers.length,passengerPositions,attachedToBoat:passengers.every(p=>p.parent===boat),canopyOpen:$('canopy').checked,stars:stars.material.opacity,lights:lamps.map(l=>l.light.intensity),camera:camera.position.toArray(),selectedMemory:selected,lightboxOpen:$('lightbox').open,subjectPosition:(city?tram:boat)?.position.toArray(),sunIntensity:sun.intensity,illustrativePedestrians:city?12:0});
+}

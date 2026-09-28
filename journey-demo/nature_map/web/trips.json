@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "notes": "One entry per explorable page. status 'live' has a generated 3D scene; 'sample' entries are placeholder destinations shown in the world view only. Dates are the source footage date (month precision) when the trip date is unknown. A memory's optional view places its photo tag and camera in scene units; follow 'subject' makes them offsets from the moving boat or tram.",
+  "regions": [
+    {"id": "hong-kong", "name": "Hong Kong", "lat": 22.33, "lng": 114.25}
+  ],
+  "trips": [
+    {
+      "id": "city",
+      "status": "live",
+      "region": "hong-kong",
+      "chapter": "Hong Kong Island",
+      "title": "A city in motion",
+      "summary": "A double-decker tram threads between dense apartment blocks and shopfronts.",
+      "lat": 22.2795,
+      "lng": 114.1760,
+      "date": "2009-09",
+      "dateLabel": "September 2009",
+      "dateNote": "Date of the source video",
+      "scene": "index.html?scene=city",
+      "cover": "city/frame-50.jpg",
+      "memories": [
+        {"image": "city/frame-50.jpg", "time": "0:50", "caption": "A double-decker tram travels between dense apartment blocks and shopfronts.", "view": {"follow": "subject", "tag": [0, 2.3, 0], "target": [0, 1.2, 0], "camera": [3.1, 3, 6.2]}},
+        {"image": "city/frame-190.jpg", "time": "3:10", "caption": "Tram tracks thread through the Hong Kong streetscape.", "view": {"tag": [1.35, 0.2, -7.5], "target": [-0.4, 0.4, -3], "camera": [-0.2, 1.7, -12.4]}},
+        {"image": "city/frame-435.jpg", "time": "7:15", "caption": "A pale blue double-decker tram rounds a street corner.", "view": {"tag": [0, 0.2, 8.6], "target": [0, 1, 7], "camera": [7, 5, 15]}}
+      ]
+    },
+    {
+      "id": "coast",
+      "status": "live",
+      "region": "hong-kong",
+      "chapter": "Sai Kung",
+      "title": "A journey together",
+      "summary": "A boat tour past volcanic islands, High Island Reservoir and the MacLehose coastal trail.",
+      "lat": 22.3700,
+      "lng": 114.3500,
+      "date": "2018-07",
+      "dateLabel": "July 2018",
+      "dateNote": "Publication date of the source video",
+      "scene": "index.html?scene=coast",
+      "cover": "memories/frame-60.jpg",
+      "memories": [
+        {"image": "memories/frame-60.jpg", "time": "1:00", "caption": "Three companions aboard the green-canopy boat: white shirt, dark sleeveless top, and orange jacket.", "view": {"follow": "subject", "frame": "radial", "tag": [0, 2.1, 0], "target": [0, 0.85, 0], "camera": [2.6, 2.2, 6.2]}},
+        {"image": "memories/frame-80.jpg", "time": "1:20", "caption": "High Island Reservoir, with stonework between the hills and turquoise water.", "view": {"tag": [-0.5, 1.1, 4], "target": [-0.5, 0.6, 3.5], "camera": [2, 2.8, 8.6]}},
+        {"image": "memories/frame-98.jpg", "time": "1:38", "caption": "A traveler on the MacLehose coastal path above the bay.", "view": {"tag": [-3.5, 3.4, 0], "target": [-3.5, 2.4, 0], "camera": [0.9, 4.3, 5.4]}}
+      ]
+    },
+    {
+      "id": "reykjavik",
+      "status": "sample",
+      "chapter": "Iceland",
+      "title": "Reykjavík in winter light",
+      "summary": "Sample destination. Upload photos or video to build this scene.",
+      "lat": 64.1466,
+      "lng": -21.9426,
+      "date": "2025-02",
+      "dateLabel": "February 2025",
+      "scene": null,
+      "cover": null,
+      "memories": []
+    },
+    {
+      "id": "kyoto",
+      "status": "sample",
+      "chapter": "Japan",
+      "title": "Autumn in Kyoto",
+      "summary": "Sample destination. Upload photos or video to build this scene.",
+      "lat": 35.0116,
+      "lng": 135.7681,
+      "date": "2025-11",
+      "dateLabel": "November 2025",
+      "scene": null,
+      "cover": null,
+      "memories": []
+    },
+    {
+      "id": "queenstown",
+      "status": "sample",
+      "chapter": "New Zealand",
+      "title": "Queenstown lakes",
+      "summary": "Sample destination. Upload photos or video to build this scene.",
+      "lat": -45.0312,
+      "lng": 168.6626,
+      "date": "2026-01",
+      "dateLabel": "January 2026",
+      "scene": null,
+      "cover": null,
+      "memories": []
+    },
+    {
+      "id": "lisbon",
+      "status": "sample",
+      "chapter": "Portugal",
+      "title": "Lisbon hills",
+      "summary": "Sample destination. Upload photos or video to build this scene.",
+      "lat": 38.7223,
+      "lng": -9.1393,
+      "date": "2026-05",
+      "dateLabel": "May 2026",
+      "scene": null,
+      "cover": null,
+      "memories": []
+    }
+  ]
+}
