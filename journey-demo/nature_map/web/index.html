@@ -86,23 +86,31 @@
     </div>
   </div>
 
+  <div id="tags" class="tags"></div>
+
   <div class="dock">
     <div class="scene-actions" role="toolbar" aria-label="Camera">
       <button id="focus">Meet the three travelers</button>
       <button id="reset">Reset view</button>
       <button id="motion" aria-pressed="true">Pause motion</button>
     </div>
-    <section class="film" aria-labelledby="film-heading">
+    <figure id="print-card" class="print-card" hidden>
+      <button id="pc-photo" class="pc-photo" aria-label="View this photo full size"><img id="pc-image" alt=""></button>
+      <figcaption aria-live="polite"><span id="film-time" class="stamp"></span><span id="film-caption"></span></figcaption>
+      <div class="pc-actions">
+        <button id="open-lightbox" class="text-button">View full size</button>
+        <button id="pc-close" class="pc-close" aria-label="Put this photo away">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+        </button>
+      </div>
+    </figure>
+    <section id="film" class="film" aria-labelledby="film-heading">
       <div class="film-head">
-        <h2 id="film-heading">Photos from this trip <span id="film-count"></span></h2>
-        <button id="film-toggle" class="film-toggle" aria-expanded="true" aria-controls="film-body">Hide photos</button>
+        <h2 id="film-heading">Photos <span id="film-count"></span></h2>
+        <button id="film-toggle" class="film-toggle" aria-expanded="true" aria-controls="film-body">Hide</button>
       </div>
       <div id="film-body" class="film-body">
         <ol id="memories" class="prints"></ol>
-        <div class="film-caption" aria-live="polite">
-          <p><span id="film-time" class="stamp"></span><span id="film-caption"></span></p>
-          <button id="open-lightbox" class="text-button">View full size</button>
-        </div>
       </div>
     </section>
   </div>
