@@ -1,5 +1,9 @@
 # My Travel Journey
 
+**[Open the new world website](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/world.html)** · [Project overview](https://dsgn2002.github.io/sai-kung-3d-viewer/) · [Create your own scene](https://dsgn2002.github.io/sai-kung-3d-viewer/create/)
+
+The globe and sample scenes are public. Personal uploads currently use the host’s private demo workspace.
+
 Turn selected travel moments into an interactive digital souvenir. The demos create a Sai Kung nature map with three boat companions and a Hong Kong tram street. Assets are generated on DGX Spark; the browser supports animation, camera controls, source memories, and daylight, sunset, and night atmospheres. MemGen is the repository name and earlier prototype codebase.
 
 A prototype for the NVIDIA DGX Spark hackathon, with repository-owned travel
