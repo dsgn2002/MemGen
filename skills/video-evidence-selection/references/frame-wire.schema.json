@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "frames": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          {
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1000
+          },
+          {
+            "enum": [
+              "overview",
+              "group",
+              "detail",
+              "other"
+            ]
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "maxItems": 16,
+            "uniqueItems": true
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "maxItems": 16,
+            "uniqueItems": true
+          },
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "maxItems": 3
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          }
+        ],
+        "items": false,
+        "minItems": 8,
+        "maxItems": 8
+      },
+      "minItems": 1,
+      "maxItems": 12
+    }
+  },
+  "required": [
+    "frames"
+  ],
+  "additionalProperties": false
+}
