@@ -36,8 +36,8 @@ const sky=new THREE.Mesh(new THREE.SphereGeometry(100,32,16),new THREE.ShaderMat
 const starGeo=new THREE.BufferGeometry(),starCoords=[];let seed=1926;function rand(){seed=(1664525*seed+1013904223)>>>0;return seed/4294967296}for(let i=0;i<900;i++){const a=rand()*Math.PI*2,y=.015+rand()*.94,r=Math.sqrt(1-y*y);starCoords.push(Math.cos(a)*r*85,y*85,Math.sin(a)*r*85)}starGeo.setAttribute('position',new THREE.Float32BufferAttribute(starCoords,3));const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:'#dce7ff',size:.28,transparent:true,opacity:0,depthWrite:false}));scene.add(stars);
 const clock=new THREE.Clock(),glb=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),lamps=[],glows=[],assetNames=[],passengers=[],passengerPositions=[];
 let loading=true,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,elapsed=0,preset='day',intensity=1,boat,tram,water,follow=false,triangles=0,loadError=null;
-// Boat laps the island: radius clears the 14-unit coast footprint, one lap ≈ 60 s, heading follows the tangent (bow assumed at local −z).
-const BOAT_RADIUS=11.5,BOAT_SPEED=Math.PI*2/60,BOAT_START=Math.atan2(6,-8),BOAT_HEADING=0;
+// Boat laps the island: radius clears the 14-unit coast footprint, one lap ≈ 20 s, heading follows the tangent (boat.web.glb's bow is at local +z, hence the half-turn).
+const BOAT_RADIUS=11.5,BOAT_SPEED=Math.PI*2/20,BOAT_START=Math.atan2(6,-8),BOAT_HEADING=Math.PI;
 const roofPlane=new THREE.Plane(new THREE.Vector3(0,-1,0),1.4);
 function std(color,extra={}){return new THREE.MeshStandardMaterial({color,roughness:.7,...extra})}
 function box(w,h,d,material,x=0,y=0,z=0,parent=root){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
