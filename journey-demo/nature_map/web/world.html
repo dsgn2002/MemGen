@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f2a33">
+<title>My Travel Journey: World</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="world.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/","topojson-client":"https://cdn.jsdelivr.net/npm/topojson-client@3/+esm","d3-geo":"https://cdn.jsdelivr.net/npm/d3-geo@3/+esm"}}</script>
+</head>
+<body>
+<main id="world" aria-label="World map of your trips">
+  <canvas id="globe" aria-label="Globe. Drag to turn, scroll or pinch to zoom." tabindex="0"></canvas>
+  <div id="pins" class="pins"></div>
+
+  <header class="w-top">
+    <h1>Your travels</h1>
+    <p id="w-stats" class="w-stats"></p>
+    <button id="w-back" class="w-back" hidden>
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4L6.5 10l6 6"/></svg>
+      Back to world
+    </button>
+  </header>
+
+  <details id="journeys" class="journeys" open>
+    <summary><h2>Your journeys</h2><span id="j-count" class="j-count"></span></summary>
+    <div id="journey-list" class="journey-list"></div>
+  </details>
+
+  <section id="card" class="card" aria-labelledby="card-title" hidden>
+    <img id="card-cover" class="card-cover" alt="">
+    <div class="card-body">
+      <p id="card-badge" class="card-badge" hidden>Sample trip</p>
+      <p id="card-chapter" class="card-chapter"></p>
+      <h2 id="card-title"></h2>
+      <p class="card-date"><time id="card-date"></time><span id="card-date-note"></span></p>
+      <p id="card-summary" class="card-summary"></p>
+      <p id="card-photos" class="card-photos"></p>
+      <div class="card-actions">
+        <a id="card-open" class="btn-primary" href="#">Open scene</a>
+        <button id="card-add" class="btn-quiet" disabled>Add photos to build this scene</button>
+        <button id="card-close" class="btn-text">Close</button>
+      </div>
+    </div>
+  </section>
+
+  <p id="w-hint" class="w-hint">Drag to turn the globe. Select a glowing pin to fly there.</p>
+
+  <div id="w-loader" class="w-loader" role="status">
+    <div class="spinner" aria-hidden="true"></div>
+    <p id="w-load-text">Drawing the map</p>
+  </div>
+  <div id="curtain" class="curtain" aria-hidden="true"></div>
+</main>
+<script type="module" src="world.js"></script>
+</body>
+</html>

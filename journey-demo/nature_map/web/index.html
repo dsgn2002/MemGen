@@ -1,5 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102d39"><title>Two sides of Hong Kong · My Travel Journey</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="viewer.css"><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script></head><body>
-<header><a href="../" target="_top" class="brand">My Travel Journey<span>Two sides of Hong Kong</span></a><nav aria-label="Choose a scene"><a id="coast-link" href="?scene=coast">Coast &amp; companions</a><a id="city-link" href="?scene=city">City by tram</a></nav></header>
-<main><section id="stage" aria-label="Interactive 3D travel scene"><canvas id="canvas" aria-label="Drag to orbit. Pinch or scroll to zoom." tabindex="0"></canvas><div class="scene-label"><span id="chapter">01 / SAI KUNG</span><h1 id="title">A journey together.</h1></div><div id="loader" role="status"><div class="spinner"></div><h2>Building your view…</h2><p id="load-text">Loading the scene and its travelers.</p></div><div class="scene-actions"><button id="focus">Meet the three travelers</button><button id="reset">Reset view</button><button id="motion" aria-pressed="true">Pause motion</button></div><p class="gesture">Drag to explore · Pinch or scroll to zoom</p></section>
-<aside><section><div class="eyebrow">Make it your moment</div><h2>Change the atmosphere</h2><div class="presets" aria-label="Time of day"><button data-preset="day" aria-pressed="true">Daylight</button><button data-preset="sunset" aria-pressed="false">Golden sunset</button><button data-preset="night" aria-pressed="false">Night sky</button></div><label class="slider">Light intensity <input id="intensity" type="range" min="0.4" max="1.6" step="0.05" value="1"><output id="intensity-value">100%</output></label><label class="slider">Scene scale <input id="scale" type="range" min="0.75" max="1.3" step="0.05" value="1"><output id="scale-value">100%</output></label><label id="canopy-control" class="check"><input id="canopy" type="checkbox"> Open canopy view</label><p class="creative">Sunset and night are creative lighting variations of the daytime footage.</p></section>
-<section class="memory-section"><div class="eyebrow">From the original video</div><div id="memories" class="memories"></div><figure><img id="memory-image" alt="Source video frame"><figcaption id="memory-caption"></figcaption></figure></section><details><summary>About this scene</summary><p id="about"></p><p id="credits"></p><a href="https://github.com/dsgn2002/MemGen" target="_blank" rel="noopener">Code and generation pipeline ↗</a></details></aside></main><script type="module" src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f2a33">
+<title>My Travel Journey</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="viewer.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a id="world-link" class="crumb-world" href="world.html">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2.3 3.2 4.8 3.2 7.5S12.2 15.2 10 17.5M10 2.5C7.8 4.8 6.8 7.3 6.8 10s1 5.2 3.2 7.5"/></svg>
+      <span>World</span>
+    </a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <span id="crumb-region" class="crumb-region"></span>
+    <span class="crumb-sep crumb-region" aria-hidden="true">/</span>
+    <span id="crumb-place" aria-current="page"></span>
+  </nav>
+  <div class="topbar-tools">
+    <nav id="trip-switch" class="trip-switch" aria-label="Other scenes in this region"></nav>
+    <button id="atmos-toggle" class="tool" aria-expanded="false" aria-controls="atmos">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7"/></svg>
+      <span>Atmosphere</span>
+    </button>
+    <button id="info-toggle" class="tool tool-icon" aria-expanded="false" aria-controls="info" aria-label="About this scene">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 9v5M10 6.2v.1"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="stage" aria-label="Interactive 3D travel scene">
+  <canvas id="canvas" aria-label="Drag to orbit. Pinch or scroll to zoom." tabindex="0"></canvas>
+
+  <div class="scene-label">
+    <p id="chapter"></p>
+    <h1 id="title"></h1>
+    <p class="trip-date"><time id="trip-date"></time><span id="date-note"></span></p>
+  </div>
+
+  <section id="atmos" class="panel atmos" aria-labelledby="atmos-heading" hidden>
+    <div class="panel-head">
+      <h2 id="atmos-heading">Atmosphere</h2>
+      <button class="panel-close" data-close="atmos" aria-label="Close atmosphere settings">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+      </button>
+    </div>
+    <div class="segmented" role="group" aria-label="Time of day">
+      <button data-preset="day" aria-pressed="true">Daylight</button>
+      <button data-preset="sunset" aria-pressed="false">Sunset</button>
+      <button data-preset="night" aria-pressed="false">Night</button>
+    </div>
+    <label class="slider"><span>Light</span><output id="intensity-value">100%</output>
+      <input id="intensity" type="range" min="0.4" max="1.6" step="0.05" value="1"></label>
+    <label class="slider"><span>Scene size</span><output id="scale-value">100%</output>
+      <input id="scale" type="range" min="0.75" max="1.3" step="0.05" value="1"></label>
+    <label id="canopy-control" class="check"><input id="canopy" type="checkbox"> Lift the boat's roof</label>
+    <p class="note">Sunset and night are imagined lighting. The footage was filmed in daylight.</p>
+  </section>
+
+  <section id="info" class="panel info" aria-labelledby="info-heading" hidden>
+    <div class="panel-head">
+      <h2 id="info-heading">About this scene</h2>
+      <button class="panel-close" data-close="info" aria-label="Close about this scene">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+      </button>
+    </div>
+    <p id="about"></p>
+    <p id="credits" class="note"></p>
+    <a class="text-link" href="https://github.com/dsgn2002/MemGen" target="_blank" rel="noopener">How these scenes are made (GitHub)</a>
+  </section>
+
+  <div id="loader" role="status">
+    <img id="loader-cover" alt="">
+    <div class="loader-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2 id="loader-title">Building your scene</h2>
+      <p id="load-text">Loading the scene and its travelers.</p>
+    </div>
+  </div>
+
+  <div class="dock">
+    <div class="scene-actions" role="toolbar" aria-label="Camera">
+      <button id="focus">Meet the three travelers</button>
+      <button id="reset">Reset view</button>
+      <button id="motion" aria-pressed="true">Pause motion</button>
+    </div>
+    <section class="film" aria-labelledby="film-heading">
+      <div class="film-head">
+        <h2 id="film-heading">Photos from this trip <span id="film-count"></span></h2>
+        <button id="film-toggle" class="film-toggle" aria-expanded="true" aria-controls="film-body">Hide photos</button>
+      </div>
+      <div id="film-body" class="film-body">
+        <ol id="memories" class="prints"></ol>
+        <div class="film-caption" aria-live="polite">
+          <p><span id="film-time" class="stamp"></span><span id="film-caption"></span></p>
+          <button id="open-lightbox" class="text-button">View full size</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<dialog id="lightbox" class="lightbox" aria-labelledby="lb-count">
+  <div class="lb-top">
+    <p id="lb-count"></p>
+    <button id="lb-close" class="lb-close">Close</button>
+  </div>
+  <button id="lb-prev" class="lb-nav lb-prev" aria-label="Previous photo">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4L6.5 10l6 6"/></svg>
+  </button>
+  <figure class="lb-print">
+    <img id="memory-image" alt="">
+    <figcaption><span id="lb-time" class="stamp"></span><span id="memory-caption"></span></figcaption>
+  </figure>
+  <button id="lb-next" class="lb-nav lb-next" aria-label="Next photo">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4l6 6-6 6"/></svg>
+  </button>
+</dialog>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

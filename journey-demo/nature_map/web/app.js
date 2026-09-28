@@ -8,23 +8,39 @@ import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 
 const $=id=>document.getElementById(id), city=new URLSearchParams(location.search).get('scene')==='city';
+let tripLoadError=null;
+const trips=await fetch('trips.json').then(r=>{if(!r.ok)throw new Error('Trip details unavailable');return r.json()}).catch(error=>{tripLoadError=error.message;$('load-text').textContent='Trip details could not load. Refresh to retry.';return null});
+if(!trips){window.travelSceneState=()=>({error:tripLoadError});}else{
+const tripId=city?'city':'coast',trip=trips.trips.find(t=>t.id===tripId),region=trips.regions.find(r=>r.id===trip.region),memories=trip.memories,n=memories.length;
+document.body.dataset.trip=tripId;document.title=`${trip.title}: My Travel Journey`;
+$('chapter').textContent=trip.chapter;$('title').textContent=trip.title;$('trip-date').textContent=trip.dateLabel;$('trip-date').setAttribute('datetime',trip.date);$('date-note').textContent=trip.dateNote||'';
+$('crumb-region').textContent=region?.name||'';$('crumb-place').textContent=trip.chapter;if(!region)document.querySelectorAll('.crumb-region').forEach(e=>e.hidden=true);
+$('world-link').href=`world.html?focus=${tripId}`;$('loader-title').textContent=trip.title;if(trip.cover)$('loader-cover').src=trip.cover;
+const tripSwitch=$('trip-switch'),regionTrips=trips.trips.filter(t=>t.status==='live'&&t.region===trip.region);regionTrips.forEach(t=>{const a=document.createElement('a');a.href=t.scene;a.dataset.trip=t.id;a.textContent=t.chapter;if(t.id===tripId)a.setAttribute('aria-current','page');tripSwitch.appendChild(a)});if(regionTrips.length<2)tripSwitch.hidden=true;
+if(city){$('focus').textContent='Follow the tram';$('canopy-control').hidden=true;}
 const sourceCity='https://commons.wikimedia.org/wiki/File:Hong_Kong_Trams,_September_2009-UKNqZzl2cu8.webm';
-const memories=city?[
- {image:'city/frame-50.jpg',text:'0:50 · A double-decker tram travels between dense apartment blocks and shopfronts.'},
- {image:'city/frame-190.jpg',text:'3:10 · Tram tracks thread through the Hong Kong streetscape.'},
- {image:'city/frame-435.jpg',text:'7:15 · A pale blue double-decker tram rounds a street corner.'}
-]:[
- {image:'memories/frame-60.jpg',text:'1:00 · Three companions aboard the green-canopy boat: white shirt, dark sleeveless top, and orange jacket.'},
- {image:'memories/frame-80.jpg',text:'1:20 · High Island Reservoir, with stonework between the hills and turquoise water.'},
- {image:'memories/frame-98.jpg',text:'1:38 · A traveler on the MacLehose coastal path above the bay.'}
-];
-$(city?'city-link':'coast-link').setAttribute('aria-current','page');
-if(city){$('chapter').textContent='02 / HONG KONG ISLAND';$('title').textContent='A city in motion.';$('focus').textContent='Follow the tram';$('canopy-control').hidden=true;}
 $('about').textContent=city?'A stylized recomposition of a 2009 Hong Kong tram-travel video. The buildings and tram were generated from source frames. Street layout, lights, and illustrative pedestrians are composed for this demo; this is not a measured reconstruction.':'Three separate reference-conditioned passenger meshes restore the visible group aboard the boat. Their clothing is approximate, and their faces are stylized. The landscape is an artistic composition. Open canopy view removes the roof for inspection.';
 $('credits').innerHTML=city?`Source: <a href="${sourceCity}" target="_blank" rel="noopener">Hong Kong Trams, September 2009</a> by michaelinlondon, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>. Frames extracted and transformed into stylized assets.`:'Source: <a href="https://www.youtube.com/watch?v=9jtnoejpLcU" target="_blank" rel="noopener">The Travel Intern · Hong Kong Outdoor Adventure</a>. Source footage and generated assets retain their respective rights.';
 let selected=0;
-function selectMemory(i){selected=i;$('memory-image').src=memories[i].image;$('memory-image').alt=memories[i].text;$('memory-caption').textContent=memories[i].text;document.querySelectorAll('[data-memory]').forEach(b=>b.setAttribute('aria-pressed',Number(b.dataset.memory)===i));}
-memories.forEach((m,i)=>{const b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0');b.dataset.memory=i;b.ariaLabel=m.text;b.onclick=()=>selectMemory(i);$('memories').appendChild(b)});selectMemory(0);
+const memoriesList=$('memories');$('film-count').textContent=`(${n})`;
+memories.forEach((m,i)=>{const li=document.createElement('li'),b=document.createElement('button'),img=document.createElement('img'),stamp=document.createElement('span');b.className='print';b.dataset.memory=i;b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',`Photo ${i+1} of ${n}, ${m.time}: ${m.caption}`);img.src=m.image;img.alt='';img.loading='lazy';img.decoding='async';stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.textContent=m.time;b.append(img,stamp);li.appendChild(b);memoriesList.appendChild(li)});
+function selectMemory(i){selected=i;const m=memories[i];document.querySelectorAll('#memories [data-memory]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.memory===String(i)?'true':'false'));$('film-time').textContent=m.time;$('film-caption').textContent=m.caption;$('memory-image').src=m.image;$('memory-image').alt=m.caption;$('memory-caption').textContent=m.caption;$('lb-time').textContent=m.time;$('lb-count').textContent=`${i+1} of ${n}`;$('lb-prev').disabled=i===0;$('lb-next').disabled=i===n-1;const button=document.querySelector(`#memories [data-memory="${i}"]`),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;button.scrollIntoView({block:'nearest',inline:'nearest',behavior:reduced?'auto':'smooth'});}
+let lastClicked=null,lightboxReturnFocus=null;
+function restoreLightboxFocus(){if(lightboxReturnFocus?.isConnected)lightboxReturnFocus.focus();lightboxReturnFocus=null;}
+function openLightbox(){const dialog=$('lightbox');if(!dialog.open){lightboxReturnFocus=document.activeElement;dialog.showModal();}$('lb-close').focus();}
+memoriesList.addEventListener('click',e=>{const b=e.target.closest('button[data-memory]');if(!b)return;const i=Number(b.dataset.memory);if(i===selected&&lastClicked===i)openLightbox();else selectMemory(i);lastClicked=i;});
+memoriesList.addEventListener('dblclick',e=>{const b=e.target.closest('button[data-memory]');if(!b)return;const i=Number(b.dataset.memory);selectMemory(i);openLightbox();});
+memoriesList.addEventListener('keydown',e=>{const b=e.target.closest('button[data-memory]');if(!b)return;if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;e.preventDefault();const i=Number(b.dataset.memory),next=Math.max(0,Math.min(n-1,i+(e.key==='ArrowRight'?1:-1)));selectMemory(next);document.querySelector(`#memories [data-memory="${next}"]`).focus();});
+$('open-lightbox').onclick=openLightbox;
+$('film-toggle').onclick=()=>{const body=$('film-body'),film=document.querySelector('.film'),hidden=!body.hidden;body.hidden=hidden;$('film-toggle').setAttribute('aria-expanded',String(!hidden));$('film-toggle').textContent=hidden?'Show photos':'Hide photos';if(hidden)film.setAttribute('data-collapsed','');else film.removeAttribute('data-collapsed');};
+const lightbox=$('lightbox');$('lb-close').onclick=()=>{if(lightbox.open)lightbox.close();restoreLightboxFocus();};lightbox.addEventListener('close',restoreLightboxFocus);lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close();});$('lb-prev').onclick=()=>selectMemory(Math.max(0,selected-1));$('lb-next').onclick=()=>selectMemory(Math.min(n-1,selected+1));lightbox.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();selectMemory(Math.max(0,selected-1));}else if(e.key==='ArrowRight'){e.preventDefault();selectMemory(Math.min(n-1,selected+1));}});
+const lbPrint=document.querySelector('.lb-print');let swipeStart=null;lbPrint.addEventListener('pointerdown',e=>{swipeStart={x:e.clientX,y:e.clientY};});lbPrint.addEventListener('pointerup',e=>{if(!swipeStart)return;const dx=e.clientX-swipeStart.x,dy=e.clientY-swipeStart.y;swipeStart=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))selectMemory(Math.max(0,Math.min(n-1,selected+(dx<0?1:-1))));});
+selectMemory(0);
+
+const panelToggles={atmos:$('atmos-toggle'),info:$('info-toggle')};
+function setPanel(name,open,restoreFocus=false){if(open){const other=name==='atmos'?'info':'atmos';$(other).hidden=true;panelToggles[other].setAttribute('aria-expanded','false');}$(name).hidden=!open;panelToggles[name].setAttribute('aria-expanded',String(open));if(restoreFocus)panelToggles[name].focus();}
+$('atmos').hidden=innerWidth<1000;$('info').hidden=true;panelToggles.atmos.setAttribute('aria-expanded',String(!$('atmos').hidden));panelToggles.info.setAttribute('aria-expanded','false');
+panelToggles.atmos.onclick=()=>setPanel('atmos',$('atmos').hidden);panelToggles.info.onclick=()=>setPanel('info',$('info').hidden);document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>setPanel(b.dataset.close,false,true));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lightbox.open){const name=!$('atmos').hidden?'atmos':!$('info').hidden?'info':null;if(name)setPanel(name,false,true);}});
 
 const scene=new THREE.Scene();scene.fog=new THREE.Fog('#c4e4df',35,100);
 const renderer=new THREE.WebGLRenderer({canvas:$('canvas'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.localClippingEnabled=true;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
@@ -92,4 +108,5 @@ function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDel
  const subject=city?tram:boat;if(follow&&subject){const p=subject.getWorldPosition(new THREE.Vector3());if(lastSubject)camera.position.add(p.clone().sub(lastSubject));controls.target.copy(p).add(new THREE.Vector3(0,city?1.5:.85,0));lastSubject=p;}else lastSubject=null;
  controls.update();sky.position.copy(camera.position);stars.position.copy(camera.position);composer.render();}
 animate();
-window.travelSceneState=()=>({scene:city?'city':'coast',loading,error:loadError,preset,intensity,playing,time:elapsed,scale:root.scale.x,assets:assetNames,triangles,passengerCount:passengers.length,passengerPositions,attachedToBoat:passengers.every(p=>p.parent===boat),canopyOpen:$('canopy').checked,stars:stars.material.opacity,lights:lamps.map(l=>l.light.intensity),camera:camera.position.toArray(),selectedMemory:selected,subjectPosition:(city?tram:boat)?.position.toArray(),sunIntensity:sun.intensity,illustrativePedestrians:city?12:0});
+window.travelSceneState=()=>({scene:city?'city':'coast',trip:tripId,loading,error:loadError,preset,intensity,playing,time:elapsed,scale:root.scale.x,assets:assetNames,triangles,passengerCount:passengers.length,passengerPositions,attachedToBoat:passengers.every(p=>p.parent===boat),canopyOpen:$('canopy').checked,stars:stars.material.opacity,lights:lamps.map(l=>l.light.intensity),camera:camera.position.toArray(),selectedMemory:selected,lightboxOpen:$('lightbox').open,subjectPosition:(city?tram:boat)?.position.toArray(),sunIntensity:sun.intensity,illustrativePedestrians:city?12:0});
+}
