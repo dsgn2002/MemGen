@@ -8,6 +8,7 @@ import subprocess
 import time
 
 from .config import ROOT, Settings
+from .presentation import carry_forward_presentation
 from .store import Store, now
 
 
@@ -47,6 +48,11 @@ def run_generation(settings, store, job, lock):
         result = json.loads((store.generation_dir(job['project'],job['id'])/'result.json').read_text())
         if result['generation_id'] != job['id']:
             raise ValueError('Generation result ID mismatch.')
+        try:
+            if carry_forward_presentation(store, job['id'], result):
+                print('Reused curated presentation for the same approved source moments.', flush=True)
+        except Exception as error:
+            print(f'Presentation reuse skipped: {error}', flush=True)
         store.finish_generation(job['id'])
     except (Exception, KeyboardInterrupt) as error:
         if child:
