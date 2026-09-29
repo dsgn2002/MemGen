@@ -1,18 +1,18 @@
 [
   {
     "start": 0,
-    "end": 6.12,
+    "end": 5.087,
     "section": "MY TRAVEL JOURNEY",
     "badge": "AI AVATAR INTRO",
-    "en": "I keep thinking about the journeys I wish I could step into again.",
-    "zh": "我常常想起那些希望能再次走进的旅程。",
+    "en": "I want to revisit the memories from my journeys.",
+    "zh": "我想再次走进旅途中的那些回忆。",
     "visual": "cartoon_vision",
-    "voice_seconds": 3.483,
+    "voice_seconds": 2.694,
     "voice_tempo": 1.0
   },
   {
-    "start": 6.12,
-    "end": 11.88,
+    "start": 5.087,
+    "end": 11.348,
     "section": "MY TRAVEL JOURNEY",
     "badge": "AI AVATAR INTRO",
     "en": "The mountains, city streets, boat rides, and people I shared them with.",
@@ -22,7 +22,7 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 11.88,
+    "start": 11.348,
     "end": 18,
     "section": "MY TRAVEL JOURNEY",
     "badge": "AI AVATAR INTRO",
@@ -67,18 +67,18 @@
   },
   {
     "start": 34,
-    "end": 39.283,
+    "end": 40.071,
     "section": "SAI KUNG COAST",
     "badge": "PUBLIC SAMPLE",
-    "en": "In Sai Kung, a boat moves beside a miniature coast.",
-    "zh": "在西贡，一艘小船驶过微缩海岸。",
+    "en": "Click Play motion, and the boat begins moving along the Sai Kung coast.",
+    "zh": "点击“播放动画”，小船就会沿着西贡海岸驶动。",
     "visual": "coast_day",
-    "voice_seconds": 3.065,
+    "voice_seconds": 4.133,
     "voice_tempo": 1.0
   },
   {
-    "start": 39.283,
-    "end": 45.698,
+    "start": 40.071,
+    "end": 46.143,
     "section": "SAI KUNG COAST",
     "badge": "PUBLIC SAMPLE",
     "en": "Three companions appear aboard it, guided by details in the original travel footage.",
@@ -88,7 +88,7 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 45.698,
+    "start": 46.143,
     "end": 54,
     "section": "SAI KUNG COAST",
     "badge": "PUBLIC SAMPLE",

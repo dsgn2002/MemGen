@@ -1,12 +1,12 @@
-00:00:00,000 – 00:00:06,120
-EN: I keep thinking about the journeys I wish I could step into again.
-简体中文字幕: 我常常想起那些希望能再次走进的旅程。
+00:00:00,000 – 00:00:05,087
+EN: I want to revisit the memories from my journeys.
+简体中文字幕: 我想再次走进旅途中的那些回忆。
 
-00:00:06,120 – 00:00:11,880
+00:00:05,087 – 00:00:11,348
 EN: The mountains, city streets, boat rides, and people I shared them with.
 简体中文字幕: 山峦、城市街道、船上的时光，还有同行的人。
 
-00:00:11,880 – 00:00:18,000
+00:00:11,348 – 00:00:18,000
 EN: What if all those memories lived on a 3D map I could explore?
 简体中文字幕: 如果这些回忆都能留在一张可以探索的3D地图上呢？
 
@@ -22,15 +22,15 @@ EN: Its world map is an invitation to revisit places through interactive scenes.
 EN: Let’s open two existing Hong Kong examples, then see how a traveler can create a personal memory.
 简体中文字幕: 先看看两个已有的香港示例，再看看旅行者如何制作自己的回忆。
 
-00:00:34,000 – 00:00:39,283
-EN: In Sai Kung, a boat moves beside a miniature coast.
-简体中文字幕: 在西贡，一艘小船驶过微缩海岸。
+00:00:34,000 – 00:00:40,071
+EN: Click Play motion, and the boat begins moving along the Sai Kung coast.
+简体中文字幕: 点击“播放动画”，小船就会沿着西贡海岸驶动。
 
-00:00:39,283 – 00:00:45,698
+00:00:40,071 – 00:00:46,143
 EN: Three companions appear aboard it, guided by details in the original travel footage.
 简体中文字幕: 船上的三位旅伴参考了原始旅行视频中的细节。
 
-00:00:45,698 – 00:00:54,000
+00:00:46,143 – 00:00:54,000
 EN: We can turn the camera, follow the boat, and compare this interpretation with the frame that inspired it.
 简体中文字幕: 我们可以旋转视角、跟随小船，并与对应的原始画面比较。
 
