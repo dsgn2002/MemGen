@@ -25,6 +25,8 @@ The coast recording starts paused, shows the **Play motion** click, and then
 shows the boat moving. The browser capture verified a 1.68-unit change in its
 scene position after playback began. A short animated transition follows the
 public viewer's **Create your own** control into the private workspace.
+The sunset and night examples use a separate browser capture that follows the
+boat; motion is paused for the final night view so the boat remains visible.
 The shorter edit keeps narration gaps below three seconds between cues. Its
 closing invites viewers to start their own 3D travel journey.
 
