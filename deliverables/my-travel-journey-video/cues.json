@@ -1,29 +1,40 @@
 [
   {
     "start": 0,
-    "end": 7.902,
+    "end": 6.12,
     "section": "THE REQUEST",
     "badge": "ANIMATED STORY",
-    "en": "What if my travel memories could live on a 3D map I can explore?",
-    "zh": "如果我的旅行回忆能变成一张可以探索的3D地图，会是什么样？",
+    "en": "I keep thinking about the journeys I wish I could step into again.",
+    "zh": "我常常想起那些希望能再次走进的旅程。",
     "visual": "cartoon_vision",
+    "voice_seconds": 3.483,
+    "voice_tempo": 1.0
+  },
+  {
+    "start": 6.12,
+    "end": 11.88,
+    "section": "THE REQUEST",
+    "badge": "ANIMATED STORY",
+    "en": "The mountains, city streets, boat rides, and people I shared them with.",
+    "zh": "山峦、城市街道、船上的时光，还有同行的人。",
+    "visual": "cartoon_vision",
+    "voice_seconds": 3.855,
+    "voice_tempo": 1.0
+  },
+  {
+    "start": 11.88,
+    "end": 18,
+    "section": "THE REQUEST",
+    "badge": "ANIMATED STORY",
+    "en": "What if all those memories lived on a 3D map I could explore?",
+    "zh": "如果这些回忆都能留在一张可以探索的3D地图上呢？",
+    "visual": "cartoon_query",
     "voice_seconds": 3.344,
     "voice_tempo": 1.0
   },
   {
-    "start": 7.902,
-    "end": 18,
-    "section": "THE REQUEST",
-    "badge": "ANIMATED STORY",
-    "en": "I want to return to the boat, the tram, dinner, and the lanterns—not lose them in my camera roll.",
-    "zh": "我想重访坐船、搭电车、聚餐和灯笼的时刻，不想让它们淹没在相册里。",
-    "visual": "cartoon_query",
-    "voice_seconds": 6.362,
-    "voice_tempo": 1.0
-  },
-  {
     "start": 18,
-    "end": 22.304,
+    "end": 21.13,
     "section": "ENTER THE WORLD",
     "badge": "PUBLIC DEMONSTRATION",
     "en": "This is My Travel Journey.",
@@ -33,8 +44,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 22.304,
-    "end": 29.957,
+    "start": 21.13,
+    "end": 26.696,
     "section": "ENTER THE WORLD",
     "badge": "PUBLIC DEMONSTRATION",
     "en": "Its world map is an invitation to revisit places through interactive scenes.",
@@ -44,8 +55,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 29.957,
-    "end": 40,
+    "start": 26.696,
+    "end": 34,
     "section": "ENTER THE WORLD",
     "badge": "PUBLIC DEMONSTRATION",
     "en": "Let’s open two existing Hong Kong examples, then see how a traveler can create a personal memory.",
@@ -55,8 +66,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 40,
-    "end": 47.66,
+    "start": 34,
+    "end": 39.283,
     "section": "SAI KUNG COAST",
     "badge": "PUBLIC SAMPLE",
     "en": "In Sai Kung, a boat moves beside a miniature coast.",
@@ -66,8 +77,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 47.66,
-    "end": 56.962,
+    "start": 39.283,
+    "end": 45.698,
     "section": "SAI KUNG COAST",
     "badge": "PUBLIC SAMPLE",
     "en": "Three companions appear aboard it, guided by details in the original travel footage.",
@@ -77,8 +88,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 56.962,
-    "end": 69,
+    "start": 45.698,
+    "end": 54,
     "section": "SAI KUNG COAST",
     "badge": "PUBLIC SAMPLE",
     "en": "We can turn the camera, follow the boat, and compare this interpretation with the frame that inspired it.",
@@ -88,8 +99,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 69,
-    "end": 75.24,
+    "start": 54,
+    "end": 58.68,
     "section": "EXPLORE THE MEMORY",
     "badge": "PUBLIC SAMPLE",
     "en": "A memory is more than a still image here.",
@@ -99,8 +110,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 75.24,
-    "end": 83.88,
+    "start": 58.68,
+    "end": 65.16,
     "section": "EXPLORE THE MEMORY",
     "badge": "PUBLIC SAMPLE",
     "en": "The traveler can change the atmosphere and move between moments from the source video.",
@@ -110,8 +121,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 83.88,
-    "end": 93,
+    "start": 65.16,
+    "end": 72,
     "section": "EXPLORE THE MEMORY",
     "badge": "PUBLIC SAMPLE",
     "en": "Sunset and night are creative lighting choices; the original frames remain visible beside the scene.",
@@ -121,8 +132,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 93,
-    "end": 100.808,
+    "start": 72,
+    "end": 77.923,
     "section": "HONG KONG BY TRAM",
     "badge": "PUBLIC SAMPLE",
     "en": "Across Hong Kong, another public example follows a double-decker tram.",
@@ -132,8 +143,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 100.808,
-    "end": 113.077,
+    "start": 77.923,
+    "end": 87.231,
     "section": "HONG KONG BY TRAM",
     "badge": "PUBLIC SAMPLE",
     "en": "Selecting different video moments changes the generated buildings around it—from a modern avenue to apartments and older shopfronts.",
@@ -143,8 +154,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 113.077,
-    "end": 122,
+    "start": 87.231,
+    "end": 94,
     "section": "HONG KONG BY TRAM",
     "badge": "PUBLIC SAMPLE",
     "en": "The tram and source clips connect the changing scene to the journey.",
@@ -154,8 +165,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 122,
-    "end": 126.694,
+    "start": 94,
+    "end": 97.673,
     "section": "CREATE YOUR OWN",
     "badge": "PRIVATE UPLOAD WORKFLOW",
     "en": "Those two scenes are curated demonstrations.",
@@ -165,8 +176,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 126.694,
-    "end": 138.898,
+    "start": 97.673,
+    "end": 107.224,
     "section": "CREATE YOUR OWN",
     "badge": "PRIVATE UPLOAD WORKFLOW",
     "en": "For a personal trip, the traveler uploads a video or photos and describes what matters—perhaps a shared dinner and a lantern display.",
@@ -176,8 +187,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 138.898,
-    "end": 145,
+    "start": 107.224,
+    "end": 112,
     "section": "CREATE YOUR OWN",
     "badge": "PRIVATE UPLOAD WORKFLOW",
     "en": "The system keeps the original media available for review.",
@@ -187,8 +198,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 145,
-    "end": 159,
+    "start": 112,
+    "end": 124,
     "section": "SKILL 01 · TRIP INTENT",
     "badge": "ACTUAL SAI KUNG SKILL RUN",
     "en": "Our first skill, Trip Intent Understanding, asks Qwen to turn the traveler's request into quoted requirements: the people, moments, and details that matter.",
@@ -198,8 +209,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 159,
-    "end": 177,
+    "start": 124,
+    "end": 139,
     "section": "SKILL 02 · VIDEO EVIDENCE",
     "badge": "ACTUAL SAI KUNG SKILL RUN",
     "en": "The second skill, Video Evidence Selection, samples across the video. Qwen examines candidate frames; the skill checks their relevance, avoids repeated views, and refines promising moments.",
@@ -209,8 +220,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 177,
-    "end": 190,
+    "start": 139,
+    "end": 151,
     "section": "SOURCE-BACKED PROPOSAL",
     "badge": "ACTUAL SAI KUNG SKILL RUN",
     "en": "It proposes original frames with timestamps, selection reasons, and unresolved details. The traveler reviews this evidence and chooses what to keep.",
@@ -220,30 +231,41 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 190,
-    "end": 204,
-    "section": "LOCAL MODEL · USER CHOICE",
-    "badge": "DGX SPARK · REMOTE ACCESS",
-    "en": "Qwen3.6-27B runs locally on a DGX Spark unit we access remotely. Once the traveler approves, the separate image and 3D pipeline creates an explorable miniature.",
-    "zh": "我们远程使用 DGX Spark，在设备上本地运行 Qwen3.6-27B。旅行者确认后，独立的图像与3D流程才会制作可探索的微缩场景。",
+    "start": 151,
+    "end": 161.327,
+    "section": "FROM EVIDENCE TO 3D",
+    "badge": "DGX SPARK · OMNIVERSE",
+    "en": "Qwen3.6-27B runs locally on our remotely accessed DGX Spark. After traveler approval, image styling and 3D mesh generation begin.",
+    "zh": "Qwen3.6-27B 在我们远程使用的 DGX Spark 上本地运行。旅行者确认后，图像风格化和3D网格生成才会开始。",
     "visual": "skill_handoff",
-    "voice_seconds": 10.635,
+    "voice_seconds": 9.834,
+    "voice_tempo": 1.0394
+  },
+  {
+    "start": 161.327,
+    "end": 173,
+    "section": "FROM EVIDENCE TO 3D",
+    "badge": "DGX SPARK · OMNIVERSE",
+    "en": "For our scenic examples, Omniverse assembles the meshes in USD, adds motion and lighting, and renders RTX previews for the interactive world.",
+    "zh": "在风景示例中，Omniverse 将网格组装成 USD 场景，加入动画和光照，并为交互世界渲染 RTX 预览。",
+    "visual": "omniverse_assembly",
+    "voice_seconds": 9.427,
     "voice_tempo": 1.0
   },
   {
-    "start": 204,
-    "end": 213.966,
+    "start": 173,
+    "end": 180.475,
     "section": "THE PERSONAL RESULT",
     "badge": "PRIVATE UPLOAD RESULT",
     "en": "Here are two selected memories from a real uploaded video: a dining scene and a lantern display.",
     "zh": "这是一次真实视频上传后选出的两段回忆：聚餐场景和灯笼展示。",
     "visual": "result_compare",
-    "voice_seconds": 5.851,
+    "voice_seconds": 5.991,
     "voice_tempo": 1.0
   },
   {
-    "start": 213.966,
-    "end": 224.407,
+    "start": 180.475,
+    "end": 188.305,
     "section": "THE PERSONAL RESULT",
     "badge": "PRIVATE UPLOAD RESULT",
     "en": "Each becomes a textured miniature that the traveler can rotate and relight, with its source frame alongside it.",
@@ -253,8 +275,8 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 224.407,
-    "end": 232,
+    "start": 188.305,
+    "end": 194,
     "section": "THE PERSONAL RESULT",
     "badge": "PRIVATE UPLOAD RESULT",
     "en": "The refined character and lantern animations are curated additions to this demonstration.",
@@ -264,36 +286,36 @@
     "voice_tempo": 1.0
   },
   {
-    "start": 232,
-    "end": 240.235,
-    "section": "A PLACE TO REVISIT",
+    "start": 194,
+    "end": 198.364,
+    "section": "YOUR JOURNEY STARTS HERE",
     "badge": "MY TRAVEL JOURNEY",
-    "en": "These are source-guided interpretations, not exact reconstructions of places or people.",
-    "zh": "这些作品以原始素材为依据进行创作，并非对地点或人物的精确重建。",
+    "en": "These scenes are source-guided interpretations of travel moments.",
+    "zh": "这些场景是依据旅行素材创作的回忆呈现。",
     "visual": "montage",
-    "voice_seconds": 5.573,
+    "voice_seconds": 3.808,
     "voice_tempo": 1.0
   },
   {
-    "start": 240.235,
-    "end": 251.765,
-    "section": "A PLACE TO REVISIT",
+    "start": 198.364,
+    "end": 203.818,
+    "section": "YOUR JOURNEY STARTS HERE",
     "badge": "MY TRAVEL JOURNEY",
-    "en": "What matters is that the traveler chooses the memories, sees the evidence, and can explore the result.",
-    "zh": "旅行者可以自己选择回忆、查看依据，并探索生成的结果。",
+    "en": "You choose the memories, check the frames, and explore the result.",
+    "zh": "由你选择回忆、核对原始画面，再探索生成的场景。",
     "visual": "montage",
-    "voice_seconds": 5.48,
+    "voice_seconds": 3.901,
     "voice_tempo": 1.0
   },
   {
-    "start": 251.765,
-    "end": 260,
-    "section": "A PLACE TO REVISIT",
+    "start": 203.818,
+    "end": 210,
+    "section": "YOUR JOURNEY STARTS HERE",
     "badge": "MY TRAVEL JOURNEY",
-    "en": "My Travel Journey turns a request into a place to revisit.",
-    "zh": "My Travel Journey，让一句请求成为可以重游的空间。",
+    "en": "Come explore My Travel Journey, and start turning your own memories into 3D.",
+    "zh": "来探索 My Travel Journey，开始把你自己的旅行回忆变成3D世界。",
     "visual": "closing",
-    "voice_seconds": 3.251,
+    "voice_seconds": 4.133,
     "voice_tempo": 1.0
   }
 ]
