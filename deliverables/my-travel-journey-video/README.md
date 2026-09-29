@@ -6,10 +6,12 @@
 - **Audio:** English ElevenLabs Multilingual v2 narration (Sarah) with an original instrumental bed
 - **Subtitles:** Burned-in Simplified Chinese; matching `subtitles.zh-Hans.srt` included
 
-The opening shows a speaking traveler imagining mountain and city memories in a
-thought cloud before the product map appears. **Team R∞** remains in one upper
-corner. The tighter edit keeps narration gaps under three seconds between cues.
-The ending invites viewers to create their own 3D travel journey.
+The opening starts with **Team R∞** and **My Travel Journey** beside a photoreal
+AI avatar created from the supplied reference image. The avatar has simple speech
+motion while mountain and city memories appear in a thought cloud, then the scene
+dissolves into the product map. Team R∞ remains in one upper corner. The tighter
+edit keeps narration gaps under three seconds between cues. The ending invites
+viewers to create their own 3D travel journey.
 
 The video shows the existing public Sai Kung and Hong Kong tram examples, then a
 separately labeled private dining and lantern result. The refined animations in
@@ -18,7 +20,8 @@ skills sequence uses an actual Sai Kung run to explain [Trip Intent
 Understanding](../../skills/trip-intent-understanding/SKILL.md) and [Video Evidence
 Selection](../../skills/video-evidence-selection/SKILL.md). Source timestamps,
 selection reasons, and unresolved details are presented as proposals for traveler
-review.
+review. Three original Sai Kung video frames appear alongside the moving boat
+and changing perspectives, with the relevant frame highlighted.
 
 **Qwen3.6-27B** ran locally on a DGX Spark unit the team accessed remotely. For
 the scenic demonstration, Omniverse assembled generated meshes in USD, positioned

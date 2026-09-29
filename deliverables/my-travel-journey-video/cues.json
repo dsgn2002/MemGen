@@ -2,8 +2,8 @@
   {
     "start": 0,
     "end": 6.12,
-    "section": "THE REQUEST",
-    "badge": "ANIMATED STORY",
+    "section": "MY TRAVEL JOURNEY",
+    "badge": "AI AVATAR INTRO",
     "en": "I keep thinking about the journeys I wish I could step into again.",
     "zh": "我常常想起那些希望能再次走进的旅程。",
     "visual": "cartoon_vision",
@@ -13,8 +13,8 @@
   {
     "start": 6.12,
     "end": 11.88,
-    "section": "THE REQUEST",
-    "badge": "ANIMATED STORY",
+    "section": "MY TRAVEL JOURNEY",
+    "badge": "AI AVATAR INTRO",
     "en": "The mountains, city streets, boat rides, and people I shared them with.",
     "zh": "山峦、城市街道、船上的时光，还有同行的人。",
     "visual": "cartoon_vision",
@@ -24,8 +24,8 @@
   {
     "start": 11.88,
     "end": 18,
-    "section": "THE REQUEST",
-    "badge": "ANIMATED STORY",
+    "section": "MY TRAVEL JOURNEY",
+    "badge": "AI AVATAR INTRO",
     "en": "What if all those memories lived on a 3D map I could explore?",
     "zh": "如果这些回忆都能留在一张可以探索的3D地图上呢？",
     "visual": "cartoon_query",
