@@ -1,0 +1,115 @@
+00:00:00,000 – 00:00:06,120
+EN: I keep thinking about the journeys I wish I could step into again.
+简体中文字幕: 我常常想起那些希望能再次走进的旅程。
+
+00:00:06,120 – 00:00:11,880
+EN: The mountains, city streets, boat rides, and people I shared them with.
+简体中文字幕: 山峦、城市街道、船上的时光，还有同行的人。
+
+00:00:11,880 – 00:00:18,000
+EN: What if all those memories lived on a 3D map I could explore?
+简体中文字幕: 如果这些回忆都能留在一张可以探索的3D地图上呢？
+
+00:00:18,000 – 00:00:21,130
+EN: This is My Travel Journey.
+简体中文字幕: 这就是 My Travel Journey。
+
+00:00:21,130 – 00:00:26,696
+EN: Its world map is an invitation to revisit places through interactive scenes.
+简体中文字幕: 世界地图让我们通过交互场景重游各地。
+
+00:00:26,696 – 00:00:34,000
+EN: Let’s open two existing Hong Kong examples, then see how a traveler can create a personal memory.
+简体中文字幕: 先看看两个已有的香港示例，再看看旅行者如何制作自己的回忆。
+
+00:00:34,000 – 00:00:39,283
+EN: In Sai Kung, a boat moves beside a miniature coast.
+简体中文字幕: 在西贡，一艘小船驶过微缩海岸。
+
+00:00:39,283 – 00:00:45,698
+EN: Three companions appear aboard it, guided by details in the original travel footage.
+简体中文字幕: 船上的三位旅伴参考了原始旅行视频中的细节。
+
+00:00:45,698 – 00:00:54,000
+EN: We can turn the camera, follow the boat, and compare this interpretation with the frame that inspired it.
+简体中文字幕: 我们可以旋转视角、跟随小船，并与对应的原始画面比较。
+
+00:00:54,000 – 00:00:58,680
+EN: A memory is more than a still image here.
+简体中文字幕: 在这里，回忆不只是一张静态照片。
+
+00:00:58,680 – 00:01:05,160
+EN: The traveler can change the atmosphere and move between moments from the source video.
+简体中文字幕: 旅行者可以改变光照氛围，也可以切换原视频中的不同片段。
+
+00:01:05,160 – 00:01:12,000
+EN: Sunset and night are creative lighting choices; the original frames remain visible beside the scene.
+简体中文字幕: 日落和夜景是创意光照效果，原始画面仍可随时查看。
+
+00:01:12,000 – 00:01:17,923
+EN: Across Hong Kong, another public example follows a double-decker tram.
+简体中文字幕: 来到香港的另一侧，第二个公开示例围绕一辆双层电车展开。
+
+00:01:17,923 – 00:01:27,231
+EN: Selecting different video moments changes the generated buildings around it—from a modern avenue to apartments and older shopfronts.
+简体中文字幕: 选择不同的视频片段，周围生成的建筑也会变化：现代街道、公寓转角，以及旧式店铺。
+
+00:01:27,231 – 00:01:34,000
+EN: The tram and source clips connect the changing scene to the journey.
+简体中文字幕: 电车和原片段把场景与旅程联系起来。
+
+00:01:34,000 – 00:01:37,673
+EN: Those two scenes are curated demonstrations.
+简体中文字幕: 刚才的两个场景是经过整理的演示作品。
+
+00:01:37,673 – 00:01:47,224
+EN: For a personal trip, the traveler uploads a video or photos and describes what matters—perhaps a shared dinner and a lantern display.
+简体中文字幕: 制作个人旅程时，旅行者上传视频或照片，并说明最在意的内容，例如一次聚餐和一处灯笼展示。
+
+00:01:47,224 – 00:01:52,000
+EN: The system keeps the original media available for review.
+简体中文字幕: 原始素材会保留，供用户核对。
+
+00:01:52,000 – 00:02:04,000
+EN: Our first skill, Trip Intent Understanding, asks Qwen to turn the traveler's request into quoted requirements: the people, moments, and details that matter.
+简体中文字幕: 第一项技能“旅程意图理解”让 Qwen 将旅行者的原话整理成明确需求：哪些人物、时刻和细节最重要。
+
+00:02:04,000 – 00:02:19,000
+EN: The second skill, Video Evidence Selection, samples across the video. Qwen examines candidate frames; the skill checks their relevance, avoids repeated views, and refines promising moments.
+简体中文字幕: 第二项技能“视频证据选择”会在整段视频中采样。Qwen 分析候选画面，技能再检查相关性、避免重复视角，并细查有希望的片段。
+
+00:02:19,000 – 00:02:31,000
+EN: It proposes original frames with timestamps, selection reasons, and unresolved details. The traveler reviews this evidence and chooses what to keep.
+简体中文字幕: 系统提出带有时间戳、选择理由和未确定细节的原始画面。旅行者核对这些依据，再决定保留哪些回忆。
+
+00:02:31,000 – 00:02:41,327
+EN: Qwen3.6-27B runs locally on our remotely accessed DGX Spark. After traveler approval, image styling and 3D mesh generation begin.
+简体中文字幕: Qwen3.6-27B 在我们远程使用的 DGX Spark 上本地运行。旅行者确认后，图像风格化和3D网格生成才会开始。
+
+00:02:41,327 – 00:02:53,000
+EN: For our scenic examples, Omniverse assembles the meshes in USD, adds motion and lighting, and renders RTX previews for the interactive world.
+简体中文字幕: 在风景示例中，Omniverse 将网格组装成 USD 场景，加入动画和光照，并为交互世界渲染 RTX 预览。
+
+00:02:53,000 – 00:03:00,475
+EN: Here are two selected memories from a real uploaded video: a dining scene and a lantern display.
+简体中文字幕: 这是一次真实视频上传后选出的两段回忆：聚餐场景和灯笼展示。
+
+00:03:00,475 – 00:03:08,305
+EN: Each becomes a textured miniature that the traveler can rotate and relight, with its source frame alongside it.
+简体中文字幕: 它们各自变成可旋转、可调整光照的纹理微缩模型，旁边还能看到原始画面。
+
+00:03:08,305 – 00:03:14,000
+EN: The refined character and lantern animations are curated additions to this demonstration.
+简体中文字幕: 人物与灯笼的细化动画是本次演示中人工整理的补充。
+
+00:03:14,000 – 00:03:18,364
+EN: These scenes are source-guided interpretations of travel moments.
+简体中文字幕: 这些场景是依据旅行素材创作的回忆呈现。
+
+00:03:18,364 – 00:03:23,818
+EN: You choose the memories, check the frames, and explore the result.
+简体中文字幕: 由你选择回忆、核对原始画面，再探索生成的场景。
+
+00:03:23,818 – 00:03:30,000
+EN: Come explore My Travel Journey, and start turning your own memories into 3D.
+简体中文字幕: 来探索 My Travel Journey，开始把你自己的旅行回忆变成3D世界。
