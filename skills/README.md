@@ -1,4 +1,4 @@
-# MemGen skills — release 1
+# My Travel Journey skills — release 1
 
 Two repository-owned skills use **local Qwen on DGX Spark** to turn a travel
 request and video into a reviewable evidence brief:

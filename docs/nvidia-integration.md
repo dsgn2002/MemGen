@@ -20,7 +20,7 @@ milestone; the broader multi-tool architecture remains planned.
 | NeMo Relay skills | Candidate guidance for instrumentation and observability if Relay is chosen. Catalog entries include nemo-relay-get-started and nemo-relay-plugin-observability. | https://github.com/NVIDIA/skills |
 | NVIDIA DGX Spark | Local model inference and artifact processing on ARM64/GB10. GPU execution and model throughput must be measured separately from CPU mesh processing. | https://github.com/NVIDIA/dgx-spark-playbooks |
 
-No NVIDIA-specific skills or tools were installed into MemGen during repository setup. Avoid installing the full skill catalog; select only skills relevant to the actual implementation. Model selection remains provisional: use the current official Spark serving recipes and benchmark image input, tool calling, latency and memory before committing to a model.
+No NVIDIA-specific skills or tools were installed into this repository during setup. Avoid installing the full skill catalog; select only skills relevant to the actual implementation. Model selection remains provisional: use the current official Spark serving recipes and benchmark image input, tool calling, latency and memory before committing to a model.
 
 ## First useful agent demonstration
 

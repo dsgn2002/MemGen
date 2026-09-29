@@ -1,161 +1,42 @@
+**Final project:** [https://dsgn2002.github.io/sai-kung-3d-viewer/demo/world.html](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/world.html)
+
 # My Travel Journey
 
-**[Open the new world website](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/world.html)** · [Project overview](https://dsgn2002.github.io/sai-kung-3d-viewer/) · [Create your own scene](https://dsgn2002.github.io/sai-kung-3d-viewer/create/)
+Turn a travel video or a set of photos into source-guided, interactive 3D memories. This repository contains the private upload application, the reusable local-Qwen analysis skills, and the DGX Spark pipeline used to build the public Sai Kung and Hong Kong demonstrations.
 
-The globe and sample scenes are public. Personal uploads currently use the host’s private demo workspace.
+[Project overview](https://dsgn2002.github.io/sai-kung-3d-viewer/) · [Create your own scene demo](https://dsgn2002.github.io/sai-kung-3d-viewer/create/) · [Explore the coast scene](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/?scene=coast) · [Explore the tram scene](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/?scene=city)
 
-Turn selected travel moments into an interactive digital souvenir. The demos create a Sai Kung nature map with three boat companions and a Hong Kong tram street. Assets are generated on DGX Spark; the browser supports animation, camera controls, source memories, and daylight, sunset, and night atmospheres. MemGen is the repository name and earlier prototype codebase.
+## What a visitor provides
 
-A prototype for the NVIDIA DGX Spark hackathon, with repository-owned travel
-skills and a local multimodal generation pipeline built on existing models.
+The private application accepts **one MP4/MOV video** (up to 10 minutes and 500 MB) **or up to 12 JPEG/PNG/WebP/HEIC photos**. The visitor also writes what the memory should preserve, what to leave out, and any creative preference. For example:
 
-## Reusable skills — release 1
+> Keep our group together on the boat, preserve the red jacket and rocky shore, and leave out the farm scenes. Make the final memory feel like a small illustrated model at sunset.
 
-Two [portable Agent Skills](skills/README.md) now provide local-Qwen commands:
+An optional clarification can identify a person or object in the source material, such as “by *us*, I mean the person in red and the two people beside them.” The prompt expresses the visitor's priorities; it is not treated as proof that those details appear in the media. The app lets the visitor review the proposal, refine the request, and choose moments before generation.
 
-- **Trip intent understanding:** convert requested highlights into source-quoted
-  requirements, separating creative changes from video facts.
-- **Video evidence selection:** discover and inspect frames across a local video,
-  select complementary supporting moments, and export a reviewable evidence brief.
+## From source media to a 3D memory
 
-The output includes original frames, silent clips, timestamps, hashes, selection
-reasons, unresolved requirements, and inference traces. The skills do not launch
-3D generation or confirm a user choice. The upload application now provides the
-approved-selection handoff to generation; scene-fidelity review and the StepFun
-harness example remain deferred.
-See [validation and measured results](skills/evals/RESULTS.md).
+![Flow diagram: a video or photo set and visitor prompt go through local Qwen analysis, human review, Qwen image styling, TRELLIS mesh generation, and a private 3D viewer. A separate curated demonstration uses Omniverse for scene assembly and RTX rendering.](docs/images/memgen-workflow.svg)
 
-## Personal uploads — first application milestone
+1. **Upload and prompt.** The app stores the original video or photos privately with the visitor's highlights and optional clarification.
+2. **Qwen understands and selects.** Local Qwen on DGX Spark parses the request, inspects sampled video frames or uploaded photos, and proposes up to three relevant moments. The proposal includes source images, evidence and uncertainty; video proposals also have timestamps and silent clips. Audio is not analyzed.
+3. **Visitor approves.** The visitor checks the proposal against the source, chooses moments, style and lighting, and saves the selection and any notes. Approval is tied to the exact analysis revision and source hashes.
+4. **Qwen Image Edit styles.** A separate local image model turns each approved reference into a miniature design.
+5. **TRELLIS.2 builds geometry.** The image-to-3D model generates textured GLB meshes. Surfaces outside the camera view are inferred.
+6. **Browser presents the result.** The private viewer loads the GLBs and provides rotation, zoom, lighting, and source-image comparison.
 
-The [private upload application](upload-app/README.md) accepts one video or a
-collection of photos plus requested highlights. A separate worker on Spark runs
-local Qwen to propose source moments and appearance/lighting options. Users review
-the evidence and save a selection tied to that analysis revision. Uploads can
-resume after a browser reload; jobs retain progress and diagnostics.
+**Where Omniverse fits:** The [published Sai Kung sample](journey-demo/nature_map/README.md) uses NVIDIA Omniverse Kit **after** Qwen image styling and TRELLIS mesh creation. Our Kit script assembles the coast, traveler, and boat into an editable OpenUSD scene, animates the boat, and renders an RTX preview. A separate packaging step prepares compact GLBs for the public Three.js viewer. The sample's three memory choices, asset prompts, and scene layout were authored for that demonstration. The current [generic private upload flow](upload-app/README.md) generates individual 3D miniatures and does **not** run its output through Omniverse or publish visitor uploads to the public site.
 
-After approval, an explicit Generate action runs local Qwen image styling and
-TRELLIS.2 mesh generation for the selected moments. The private browser viewer
-provides rotation, zoom, atmosphere controls and GLB downloads, with recorded
-analysis/generation timing. These are source-guided 3D miniatures, with inferred
-hidden geometry. Uploaded media stays separate from the published sample website.
-See [application checks](upload-app/RELEASE-CHECKS.md).
+## See the result and the evidence
 
-## Published demonstration
+- **Public project:** [My Travel Journey](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/world.html) opens on a travel globe with Sai Kung boat/coast and Hong Kong tram scenes. Visitors can inspect source memories and change the scene atmosphere. The scenes are curated demonstrations, not automatically generated from an arbitrary new upload.
+- **Generic workflow:** [Private upload app](upload-app/README.md) documents setup, media limits, approval, generation, and the private viewer. [Release checks](upload-app/RELEASE-CHECKS.md) record application validation.
+- **Model and asset pipeline:** [Sai Kung pipeline](journey-demo/nature_map/README.md) documents local Qwen, Qwen-Image-Edit-2511, TRELLIS.2-4B, Omniverse Kit, USD, RTX, and browser packaging. The [sample-specific pipeline diagram](docs/images/sai-kung-pipeline.svg) shows that run in more detail.
+- **Reusable analysis skills:** [Trip intent understanding and video evidence selection](skills/README.md) turn the prompt and source frames into a traceable evidence brief. See the [evaluation results](skills/evals/RESULTS.md).
+- **Architecture and history:** [NVIDIA integration status](docs/nvidia-integration.md) and the [earlier depth-projection demo](journey-demo/README.md). The older [rocket sample](souvenir-sample/README.md) is a separate geometry prototype.
 
-[Project website](https://dsgn2002.github.io/sai-kung-3d-viewer/) ·
-[Coast and three companions](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/?scene=coast) ·
-[Hong Kong by tram](https://dsgn2002.github.io/sai-kung-3d-viewer/demo/?scene=city)
+## Scope and provenance
 
-The updated browser demo preserves the three boat passengers as separate generated
-assets and includes a city-travel sample with a moving double-decker tram. Three city moment buttons switch between newly generated office towers, a rounded apartment corner, and older shopfronts, with matching silent source clips. Both
-scenes have daylight, golden sunset, and night atmosphere controls. The source
-frames, creative additions, and limitations are identified in each viewer.
-See [revision setup and validation](journey-demo/nature_map/web/README.md).
+The personal outputs are artistic interpretations of visible source material. Qwen proposes evidence and style; it does not verify identities or geography. TRELLIS infers hidden geometry, so a generated mesh is not a measured reconstruction. The current pipeline uses existing local models on DGX Spark; it does not train a new model or require a paid inference API. The earlier optional StepFun analysis belongs to the historical depth-projection demo, not the current Qwen upload path.
 
-## Sai Kung nature map
-
-The local pipeline is **Qwen3.6-27B video understanding → Qwen-Image-Edit-2511
-styling → TRELLIS.2-4B textured meshes → Omniverse assembly and RTX rendering**.
-It uses no paid inference API. The browser displays the generated meshes with
-a moving boat, animated water, lighting controls, and three original memories:
-the Sai Kung boat tour, High Island Reservoir, and MacLehose coastal trail.
-
-![Sai Kung pipeline: video frames → Qwen understanding → selected memories → Qwen image styling → TRELLIS meshes → Omniverse and browser assets → interactive map](docs/images/sai-kung-pipeline.svg)
-
-The sample uses nine chronological frames and three fixed memory selections.
-The VLM records a journey summary; scene prompts and map layout are authored
-for this Sai Kung example, rather than automatically compiled from that summary.
-
-The output contains about 350,000 triangles across three independent meshes.
-Browser assets use WebP textures and Meshopt compression; editable originals
-and a USD scene with textures remain available. This is an artistic map with
-generated hidden surfaces and a posed traveler, not surveyed geography or a
-rigged human animation.
-
-See [sample scripts, environment, and usage](journey-demo/nature_map/README.md).
-Generated assets and model weights remain on Spark; the private preview is
-served through an SSH tunnel at `http://127.0.0.1:8768/`.
-
-## Earlier depth-projection demo
-
-The workflow starts with a human-readable **journey review**: a saved Step 5
-summary, four scene suggestions with source frames and video previews, and an
-explicit selection of one or more scenes. Selected scenes 1–3 show the Sai Kung
-boat tour, MacLehose Trail, and Yi O harvest.
-
-The generation pipeline uses **local MoGe-2 inference → NVIDIA Omniverse Kit →
-an interactive browser viewer**. Generation makes no StepFun API calls. StepFun
-was used for the earlier video understanding stage; its scripts are retained
-as optional, paid analysis tools and are not invoked by reconstruction.
-
-Each selected 1.5-second shot has 12 estimated depth frames, 32,400 vertices and
-64,052 triangles. Omniverse assembles the animated geometry and source textures
-into editable OpenUSD, renders RTX previews, and exports a textured still GLB
-per scene. The browser plays the original movement across the estimated surfaces
-and supports scene switching, pause, rotate, zoom, scale, reset and wireframe
-inspection. USD/GLB reloads, animation, rendered colors and browser controls have
-been checked on the actual output.
-
-This is **animated depth projection**. It preserves the recorded appearance near
-the source viewpoint. Hidden sides are not reconstructed, wide rotations can
-stretch surfaces, and people are not separately rigged characters. A complete
-multi-view world remains future work; see the
-[reconstruction revision](docs/realistic-journey-revision.md).
-
-See [demo setup and commands](journey-demo/README.md). Run artifacts live under
-`journey-demo/runs/` and are excluded from version control; credentials remain in
-the user's private configuration on the Spark.
-
-## Earlier rocket sample
-
-- A reproducible mesh customization script using three CC0 Kenney rocket modules.
-- A display base and real extruded lettering with a configurable visitor name.
-- GLB export, a static geometry preview, and an interactive HTML viewer.
-- Export/reload validation with geometry counts and finite-coordinate checks.
-
-The rocket sample uses deterministic Python mesh processing. It was built on a development Mac and copied to a DGX Spark. Its STL is an assembly preview, not a print-ready solid.
-
-## Run the sample
-
-Python 3.10 or newer:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r souvenir-sample/requirements.txt
-python souvenir-sample/build_sample.py --name "ALEX"
-python souvenir-sample/make_viewer.py
-python -m http.server 8080 --bind 127.0.0.1
-```
-
-Open http://localhost:8080/souvenir-sample/output/viewer.html. The viewer requires internet access for its pinned model-viewer JavaScript library. The mesh is embedded in the HTML.
-
-Outputs are written to `souvenir-sample/output/`. GLB uses metres and Y-up; STL uses millimetres and Z-up. Each run replaces the sample outputs.
-
-## Agent workflow being designed
-
-1. Interpret the video, summarize the journey and suggest scenes with source frames. The new map runs local Qwen; the older review reuses saved Step 5 results.
-2. Let the user select one or more scenes and describe what matters. Save the selection before generation.
-3. Style selected memories with local Qwen image editing, generate terrain and character meshes with TRELLIS.2, then assemble and render them in NVIDIA Omniverse. Skeletal character animation remains future work.
-4. Inspect rendered views, check browser interactions, and apply bounded repairs or visitor edits.
-5. Deliver a shared browser experience with GLB assets, a behavior manifest, and selected memories.
-
-The review, local depth reconstruction, Omniverse integration and interactive
-player are implemented in `journey-demo/`. The earlier primitive WorldSpec
-compiler is retained as a historical prototype. The upload application adds
-photo/video ingestion and proposed source selection. Visual repair, generation
-from arbitrary approved uploads, public result sharing, and persistent scene
-editing remain future work. The current preview is served from Spark through an SSH tunnel.
-
-See [NVIDIA integration plan](docs/nvidia-integration.md) for the available tools, proposed roles, and implementation status.
-
-See [My Travel Journey plan](docs/my-travel-journey-plan.md) for the current photo/video workflow, VLM world-design contract, Omniverse generation pipeline, interactions, and delivery milestones.
-
-The Spark has a dedicated `travel_journey_map` Conda environment with Python 3.12
-and Omniverse Kit installed. See the [pipeline demo setup](journey-demo/README.md)
-for activation and the Step 5 analysis script. Actual Step 5 inference, USD
-generation, GLB export, and Omniverse RTX rendering have been validated on the Spark.
-
-## License
-
-Original project code: [MIT](LICENSE). Included source meshes: Kenney Space Kit, CC0; see [third-party notices](THIRD_PARTY_NOTICES.md). NVIDIA tools and any future model weights retain their respective licenses. This project is not an official NVIDIA or HKUST product.
+Original project code is [MIT licensed](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for included assets and their licenses. This is a hackathon prototype, not an official NVIDIA or HKUST product.

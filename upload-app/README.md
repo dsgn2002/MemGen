@@ -8,21 +8,21 @@ TRELLIS.2 meshes, then opens an interactive private viewer. The public coast and
 city demonstrations remain separate. Uploaded media is not published.
 
 ```mermaid
-flowchart LR
-    A[Browser: media + highlights] --> B[Private upload API]
-    B --> C[(Source files + job queue)]
-    C --> D[Spark worker]
-    D --> E[Trip intent skill]
-    E --> F[Video evidence skill / photo adapter]
-    F --> G[Qwen appearance suggestions]
-    G --> H[Browser: source review]
-    H --> I[(Revision-bound user approval)]
-    I --> J[Explicit Generate action]
-    J --> K[Qwen Image Edit → TRELLIS meshes]
-    K --> L[Private interactive 3D viewer]
+flowchart TD
+    A["Media + highlight request"] --> B["Private upload API"]
+    B --> C["Source storage + job queue"]
+    C --> D["Spark worker: local Qwen"]
+    D --> E["Intent + video/photo evidence"]
+    E --> F["Moment + appearance proposals"]
+    F --> G["Visitor reviews sources"]
+    G --> H["Revision-bound approval"]
+    H --> I["Explicit Generate action"]
+    I --> J["Qwen Image Edit: styled images"]
+    J --> K["TRELLIS.2: textured meshes"]
+    K --> L["Private interactive 3D viewer"]
 ```
 
-The worker runs all three model stages with the local checkpoint. The two
+The worker runs the model stages from locally stored checkpoints. The two
 reusable skills own intent and evidence behavior; `trip_upload/pipeline.py`
 adapts photos and creates the application's proposal wrapper. The API owns
 uploads, access control, queueing, and approval. The same exclusive GPU worker

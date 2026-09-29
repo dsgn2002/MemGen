@@ -14,7 +14,7 @@ remains planned.
 
 Turn travel photos, a video of approximately five minutes, or a mixture of both into a personalized, interactive 3D world that the traveler can explore and share. This is the digital souvenir: a miniature journey with recognizable places, linked memories, and a guided tour.
 
-The product and default experience title is **My Travel Journey**. MemGen remains the existing prototype codebase. This plan supersedes the initial single-diorama proposal in `photo-to-souvenir-plan.md`.
+The product and default experience title is **My Travel Journey**. The repository was formerly named MemGen. This plan supersedes the initial single-diorama proposal in `photo-to-souvenir-plan.md`.
 
 **Core architecture:** StepFun Step 5 Preview interprets the journey and designs a detailed world specification. An application compiler validates that design against available geometry and interaction capabilities. Our NVIDIA Omniverse Kit extension generates and assembles the 3D scene. A browser player runs navigation, hotspots, media playback, and the guided journey.
 

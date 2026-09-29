@@ -80,7 +80,7 @@ Browser packaging requires `vendor/meshoptimizer-0.25/gltfpack`.
 
 ## Run and inspect
 
-Copy these scripts from a checkout of MemGen on Spark into the existing runtime:
+Copy these scripts from a checkout of My-Travel-Journey on Spark into the existing runtime:
 
 ```bash
 base=/home/Developer/travel_journey_map
